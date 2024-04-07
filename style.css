@@ -42,12 +42,14 @@ nav ul {
 }
 
 nav ul li {
-    margin-bottom: 10px;
+    margin-bottom: 20px; /* Increase the margin-bottom value for more space */
 }
 
 nav ul li a {
     text-decoration: none;
     color: #333;
+    font-size: 18px; /* Increase the font size to match h2 */
+    font-weight: bold; /* Make the navigation items bold */
 }
 
 main {
@@ -69,8 +71,7 @@ h2 {
 
 a {
     color: #333;
-    text-decoration: underline;
-    text-decoration-color: #333;
+    text-decoration: none;
 }
 
 footer {
