@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -12,11 +12,6 @@ header {
     text-align: center;
 }
 
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
 .contact-info {
     text-align: center;
     margin-top: 10px;
@@ -26,11 +21,6 @@ h1 {
     margin: 0 10px;
     color: #fff;
     text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.contact-info a:hover {
-    color: #f4f4f4;
 }
 
 .container {
@@ -52,19 +42,14 @@ nav ul {
 }
 
 nav ul li {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Increase the margin-bottom value for more space */
 }
 
 nav ul li a {
     text-decoration: none;
     color: #333;
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-    color: #555;
+    font-size: 18px; /* Increase the font size to match h2 */
+    font-weight: bold; /* Make the navigation items bold */
 }
 
 main {
@@ -82,23 +67,12 @@ h2 {
     padding: 10px;
     display: inline-block;
     margin-bottom: 10px;
-    font-size: 2rem;
-}
-
-h3 {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
 }
 
 a {
     color: #333;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #555;
     text-decoration: underline;
+    text-decoration-color: #333;
 }
 
 footer {
@@ -106,35 +80,4 @@ footer {
     color: #fff;
     padding: 10px;
     text-align: center;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-main section {
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Responsive Styles */
-@media screen and (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-
-    nav {
-        width: 100%;
-        height: auto;
-        position: static;
-    }
-
-    main {
-        width: 100%;
-    }
 }
