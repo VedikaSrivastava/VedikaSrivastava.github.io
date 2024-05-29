@@ -20,16 +20,16 @@ h1 {
 /* Style for the logo/image */
 .logo {
     display: block;
-    margin: 0 auto 5px auto;
-    max-width: 75px;
+    margin: 2px auto -25px auto; 
+    max-width: 80px;
     height: auto;
 }
 
 /* Style for the professional title */
 .professional-title {
     font-size: 1rem;
-    margin-top: -10px;
-    margin-bottom: 0;
+    margin-top: -15px;
+    margin-bottom: 5px;
     color: #fff;
 }
 
