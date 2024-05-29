@@ -23,7 +23,6 @@ h1 {
     margin: 0 auto;
     max-width: 80px; /* Adjust size as needed */
     height: auto;
-    padding: 5px 0; /* Adjust padding to reduce space around the logo */
 }
 
 /* Style for the professional title */
@@ -52,7 +51,6 @@ h1 {
 .contact-info a:hover {
     color: #f4f4f4;
 }
-
 
 .contact-info a:hover .tooltip {
     visibility: visible;
