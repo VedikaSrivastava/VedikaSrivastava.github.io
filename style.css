@@ -138,3 +138,51 @@ main section {
         width: 100%;
     }
 }
+
+
+
+
+/* Style for the logo/image */
+.logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 100px; /* Adjust size as needed */
+    height: auto;
+}
+
+/* Style for the professional title */
+.professional-title {
+    font-size: 1.2rem;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Tooltip container */
+.contact-info a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.contact-info a .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position above the link */
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.contact-info a:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
