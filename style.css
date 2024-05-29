@@ -8,13 +8,30 @@ body {
 header {
     background-color: #333;
     color: #fff;
-    padding: 20px;
+    padding: 10px 20px; /* Reduce padding to make the header less tall */
     text-align: center;
 }
 
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+    font-size: 2rem; /* Adjust font size */
+    margin-bottom: 5px; /* Reduce margin to decrease space below the name */
+}
+
+/* Style for the logo/image */
+.logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 80px; /* Adjust size as needed */
+    height: auto;
+    padding: 5px 0; /* Adjust padding to reduce space around the logo */
+}
+
+/* Style for the professional title */
+.professional-title {
+    font-size: 1rem; /* Adjust font size if needed */
+    margin-top: -10px;
+    margin-bottom: 10px; /* Reduce margin to decrease space around the title */
+    color: #fff;
 }
 
 .contact-info {
@@ -23,7 +40,10 @@ h1 {
 }
 
 .contact-info a {
-    margin: 0 10px;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    padding: 0 5px; /* Adjust padding to control space around contact info */
     color: #fff;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -31,6 +51,12 @@ h1 {
 
 .contact-info a:hover {
     color: #f4f4f4;
+}
+
+
+.contact-info a:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
 }
 
 .container {
@@ -137,52 +163,4 @@ main section {
     main {
         width: 100%;
     }
-}
-
-
-
-
-/* Style for the logo/image */
-.logo {
-    display: block;
-    margin: 0 auto;
-    max-width: 100px; /* Adjust size as needed */
-    height: auto;
-}
-
-/* Style for the professional title */
-.professional-title {
-    font-size: 1.2rem;
-    margin-top: -10px;
-    margin-bottom: 20px;
-    color: #fff;
-}
-
-/* Tooltip container */
-.contact-info a {
-    position: relative;
-    display: inline-block;
-    text-decoration: none;
-}
-
-.contact-info a .tooltip {
-    visibility: hidden;
-    width: 120px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%; /* Position above the link */
-    left: 50%;
-    margin-left: -60px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.contact-info a:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
 }
