@@ -27,9 +27,9 @@ h1 {
 
 /* Style for the professional title */
 .professional-title {
-    font-size: 1rem; /* Adjust font size if needed */
-    margin-top: -10px;
-    margin-bottom: 10px; /* Reduce margin to decrease space around the title */
+    font-size: 1rem;
+    /* margin-top: -10px; */
+    margin-bottom: 5px; 
     color: #fff;
 }
 
@@ -42,7 +42,7 @@ h1 {
     position: relative;
     display: inline-block;
     text-decoration: none;
-    padding: 0 5px; /* Adjust padding to control space around contact info */
+    padding: 0 5px;
     color: #fff;
     text-decoration: none;
     transition: color 0.3s ease;
