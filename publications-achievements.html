@@ -5,49 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vedika Srivastava - Home</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <img src="assests\images\vs-high-resolution-logo-color-on-transparent-background.png" alt="Logo" class="logo">
-        <h1>Vedika Srivastava</h1>
-        <h2 class="professional-title">AI/ML Engineer</h2>
-        <div class="contact-info">
-            <a href="mailto:vedikas3012@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-                <a href="tel:+18572608766"><i class="fas fa-phone"></i> Phone</a>
-                <a href="https://www.linkedin.com/in/vedika-srivastava/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                <a href="https://github.com/vedikaSrivastava" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                <a href="https://scholar.google.com/citations?user=cPLpZOYAAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-title">
+                <img src="assets/images/vs-logo.png" alt="Logo" class="logo">
+                <div class="header-info">
+                    <h1>Vedika Srivastava</h1>
+                    <h2 class="professional-title">AI/ML Engineer</h2>
+                </div>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav-list">
+                    <li><a href="index.html">About</a></li>
+                    <li><a href="experience-skills.html">Experience & Skills</a></li>
+                    <li><a href="projects-certifications.html">Projects</a></li>
+                    <li><a href="publications-achievements.html">Publications & Achievements</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <div class="container">
-        <nav>
-            <ul>
-                <li><a href="index.html">About</a></li>
-                <li><a href="experience-skills.html">Work Experience & Skills</a></li>
-                <li><a href="projects-certifications.html">Projects & Certifications</a></li>
-                <li><a href="publications-achievements.html">Publications & Achievements</a></li>
-            </ul>
-        </nav>
-
-        <main>
+    <main>
+        <div class="content-wrapper">
             <section id="publications">
                 <h2>Publications</h2>
-                <h3><a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/9781119857891.ch5", target="_blank">Vedika Srivastava, Arti Khaparde, Akshit Kothari, Vaidehi Deshmukh. (2023). "NLP-Based AI-Powered Sanskrit Voice Bot." In Artificial Intelligence Applications and Reconfigurable Architectures (Chapter 5, pp. 95-124). John Wiley & Sons, Ltd. DOI: 10.1002/9781119857891.ch5</a></h3>
-                <p>The rapid evolution of human beings as a species can be credited to their ability to commune with one another and efficiently drive ideas, messages and intent past each other. One of the antediluvian and well-structured languages, Sanskrit, is being relegated only to use in scriptures during modern times. Our intent is to build a virtual assistant (voice/chat) which communicates through Sanskrit ensuring this language becomes the linchpin of understanding machines and relaying information and knowledge not only for an extensive heterogeneity of vernacular population but for the world. Studying various Machine Learning and Neural Network models, understanding their scope, underlying principles and application hence facilitating deep understanding of the scope of AI Assistants and aid in building a Sanskrit Voice Bot. Various algorithm explore include linear regression and logistic regression, whose reach is limited to linearly related/separable data, which was test by deploying gradient descent algorithm. Support Vector Machine kernels resolve this problem by providing linear as well as polynomial decision boundary. Principal Component Analysis finds its major application in dimensionality reduction and Anomaly Detection would be used to detect any out of the bound data input. Furthermore, Sequence Models would play a major role in all the required Natural Language Processing.</p>
-        
-                <h3><a href="https://iopscience.iop.org/article/10.1149/10701.4315ecst/meta", target="_blank">Zeeshan Faiz, Vedika Srivastava, Suchitra Khoje. (2022). "Virtual Voice Assistant for Smart Devices." ECS Transactions, 107(1), 4315. The Electrochemical Society, Inc. DOI: 10.1149/10701.4315ecst</a></h3>
-                <p>Digital assistants have been a budding technology lately. In modern society, chatbots have found their way in many sectors of e-commerce. With widespread advancements in the field of artificial intelligence, developing machines to ease real life tasks is the norm of the day. Voice Assistants have gained a lot of popularity in this era of home automation and smart devices. These personal assistants, voice or text, can be easily programmed to perform many tasks by simply commanding them to. High tech industries like, Google have publicized voice-based search that is, especially, a bonanza for many like senior citizens who are not comfortable using the keypad/keyboard or English language as these assistants offer support in other languages like Hindi too. Any voice-based assistant works on two pivotal functions namely - listening to(detecting) commands and responding to the given commands given by user. Along with these two base functions, we need customized directive that will define the functionality of the voice assistant.</p>
-        
-                <h3><a href="https://ieeexplore.ieee.org/abstract/document/10007489", target="_blank">Pansare, Nidhi Sabu, Himanshi Kushwaha, Vedika Srivastava, Nitin Thakur, Kanishk Jamgaonkar, Md. Zeeshan Faiz. (2022). "Drone Detection using YOLO and SSD: A Comparative Study." In 2022 International Conference on Signal and Information Processing (IConSIP), pp. 1-6. DOI: 10.1109/ICoNSIP49665.2022.10007489</a></h3>
-                <p>Unmanned Ariel Vehicles (UAVs) are one of the fastest-growing technologies with a wide range of uses. UAVs have become more accessible to the masses over the recent years. However, both negligent and malevolent usage of UAVs can pose a significant risk. Drone technology today poses a catastrophic threat to the governments, companies, and the general public. Drones have been used for espionage and military strikes in the past, and as the market for UAVs grows, more of these attacks can be expected in the future. Combat drones or UCAVs have changed how dangerous operations were earlier carried out. They can also be used to remotely launch targeted attacks or transport heavy weaponry. For this reason, it is essential for an organization to adopt automated drone detection and tracking mechanisms. Ultra-high-definition radar, microphones, cameras, and radio frequency (RF) sensing are among the technologies being considered and used for UAVs. Such detecting methods, on the other hand, entail substantial maintenance and configuration expenses. Because they aren't portable, they can't be implemented on a broad scale. The advancements in GPU technology have given a huge boost to deep learning; a field which wasn't considered to be feasible due to its high computing power requirements. Deep Learning has given rise to many new areas of research; especially Computer Vision (CV).</p>
-            
-                <h3><a href="https://dl.acm.org/doi/10.1145/3647444.3652461", target="_blank">Vedika Srivastava and Hemant Kumar Singh. 2024. A Comparative Study of Neural Style Transfer Models. In Proceedings of the 5th International Conference on Information Management & Machine Intelligence (ICIMMI '23). Association for Computing Machinery, New York, NY, USA, Article 157, 1–4. https://doi.org/10.1145/3647444.3652461</a></h3>
-                <p>The study evaluates various style transfer models and their ability to generate high-quality stylized images. Four distinct style transfer models will be compared and analyzed, taking into consideration their respective strengths and limitations. The outcomes of this investigation are anticipated to provide valuable insights into the effectiveness of these models and facilitate the identification of the optimal approach for achieving superior style transfer in image transformation applications. Additionally, the research aims to contribute to the understanding and tracking of the evolutionary progress of Neural Style transfer methods.
-                    <br> <a href="https://www.growkudos.com/publications/10.1145%25252F3647444.3652461/reader", target="_blank"><i>View on Kudos</i></a>
-                </p>
+                <div class="publication-card">
+                    <h3><a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/9781119857891.ch5" target="_blank">NLP-Based AI-Powered Sanskrit Voice Bot</a></h3>
+                    <p>Vedika Srivastava, Arti Khaparde, Akshit Kothari, Vaidehi Deshmukh. (2023). In Artificial Intelligence Applications and Reconfigurable Architectures (Chapter 5, pp. 95-124). John Wiley & Sons, Ltd. DOI: 10.1002/9781119857891.ch5</p>
+                    <button class="btn-details" onclick="toggleAbstract(this)">Read More</button>
+                    <div class="abstract" style="display: none;">
+                        <p>The rapid evolution of human beings as a species can be credited to their ability to commune with one another and efficiently drive ideas, messages and intent past each other. One of the antediluvian and well-structured languages, Sanskrit, is being relegated only to use in scriptures during modern times. Our intent is to build a virtual assistant (voice/chat) which communicates through Sanskrit ensuring this language becomes the linchpin of understanding machines and relaying information and knowledge not only for an extensive heterogeneity of vernacular population but for the world. Studying various Machine Learning and Neural Network models, understanding their scope, underlying principles and application hence facilitating deep understanding of the scope of AI Assistants and aid in building a Sanskrit Voice Bot. Various algorithm explore include linear regression and logistic regression, whose reach is limited to linearly related/separable data, which was test by deploying gradient descent algorithm. Support Vector Machine kernels resolve this problem by providing linear as well as polynomial decision boundary. Principal Component Analysis finds its major application in dimensionality reduction and Anomaly Detection would be used to detect any out of the bound data input. Furthermore, Sequence Models would play a major role in all the required Natural Language Processing.</p>
+                    </div>
+                </div>
+
+                <div class="publication-card">
+                    <h3><a href="https://iopscience.iop.org/article/10.1149/10701.4315ecst/meta" target="_blank">Virtual Voice Assistant for Smart Devices</a></h3>
+                    <p>Zeeshan Faiz, Vedika Srivastava, Suchitra Khoje. (2022). ECS Transactions, 107(1), 4315. The Electrochemical Society, Inc. DOI: 10.1149/10701.4315ecst</p>
+                    <button class="btn-details" onclick="toggleAbstract(this)">Read More</button>
+                    <div class="abstract" style="display: none;">
+                        <p>Digital assistants have been a budding technology lately. In modern society, chatbots have found their way in many sectors of e-commerce. With widespread advancements in the field of artificial intelligence, developing machines to ease real life tasks is the norm of the day. Voice Assistants have gained a lot of popularity in this era of home automation and smart devices. These personal assistants, voice or text, can be easily programmed to perform many tasks by simply commanding them to. High tech industries like, Google have publicized voice-based search that is, especially, a bonanza for many like senior citizens who are not comfortable using the keypad/keyboard or English language as these assistants offer support in other languages like Hindi too. Any voice-based assistant works on two pivotal functions namely - listening to(detecting) commands and responding to the given commands given by user. Along with these two base functions, we need customized directive that will define the functionality of the voice assistant.</p>
+                    </div>
+                </div>
+
+                <div class="publication-card">
+                    <h3><a href="https://ieeexplore.ieee.org/abstract/document/10007489" target="_blank">Drone Detection using YOLO and SSD: A Comparative Study</a></h3>
+                    <p>Pansare, Nidhi Sabu, Himanshi Kushwaha, Vedika Srivastava, Nitin Thakur, Kanishk Jamgaonkar, Md. Zeeshan Faiz. (2022). In 2022 International Conference on Signal and Information Processing (IConSIP), pp. 1-6. DOI: 10.1109/ICoNSIP49665.2022.10007489</p>
+                    <button class="btn-details" onclick="toggleAbstract(this)">Read More</button>
+                    <div class="abstract" style="display: none;">
+                        <p>Unmanned Ariel Vehicles (UAVs) are one of the fastest-growing technologies with a wide range of uses. UAVs have become more accessible to the masses over the recent years. However, both negligent and malevolent usage of UAVs can pose a significant risk. Drone technology today poses a catastrophic threat to the governments, companies, and the general public. Drones have been used for espionage and military strikes in the past, and as the market for UAVs grows, more of these attacks can be expected in the future. Combat drones or UCAVs have changed how dangerous operations were earlier carried out. They can also be used to remotely launch targeted attacks or transport heavy weaponry. For this reason, it is essential for an organization to adopt automated drone detection and tracking mechanisms. Ultra-high-definition radar, microphones, cameras, and radio frequency (RF) sensing are among the technologies being considered and used for UAVs. Such detecting methods, on the other hand, entail substantial maintenance and configuration expenses. Because they aren't portable, they can't be implemented on a broad scale. The advancements in GPU technology have given a huge boost to deep learning; a field which wasn't considered to be feasible due to its high computing power requirements. Deep Learning has given rise to many new areas of research; especially Computer Vision (CV).</p>
+                    </div>
+                </div>
+
+                <div class="publication-card">
+                    <h3><a href="https://dl.acm.org/doi/10.1145/3647444.3652461" target="_blank">A Comparative Study of Neural Style Transfer Models</a></h3>
+                    <div class="featured">
+                        <a href="https://www.growkudos.com/publications/10.1145%25252F3647444.3652461/reader" target="_blank">Featured on Kudos</a>
+                    </div>
+                    <p>Vedika Srivastava and Hemant Kumar Singh. 2024. In Proceedings of the 5th International Conference on Information Management & Machine Intelligence (ICIMMI '23). Association for Computing Machinery, New York, NY, USA, Article 157, 1–4. https://doi.org/10.1145/3647444.3652461</p>
+                    <button class="btn-details" onclick="toggleAbstract(this)">Read More</button>
+                    <div class="abstract" style="display: none;">
+                        <p>The study evaluates various style transfer models and their ability to generate high-quality stylized images. Four distinct style transfer models will be compared and analyzed, taking into consideration their respective strengths and limitations. The outcomes of this investigation are anticipated to provide valuable insights into the effectiveness of these models and facilitate the identification of the optimal approach for achieving superior style transfer in image transformation applications. Additionally, the research aims to contribute to the understanding and tracking of the evolutionary progress of Neural Style transfer methods.
+                            <br> <a href="https://www.growkudos.com/publications/10.1145%25252F3647444.3652461/reader" target="_blank"><i>View on Kudos</i></a>
+                        </p>
+                    </div>
+                </div>
 
             </section>
 
@@ -62,11 +87,19 @@
                     <li>Secured four-year engineering scholarships for academic excellence</li>
                 </ul>
             </section>
-        </main>
-    </div>
+        </div>
+    </main>
 
     <footer>
-        
+        <div class="contact-info">
+            <a href="mailto:vedikas3012@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+            <a href="tel:+18572608766"><i class="fas fa-phone"></i> Phone</a>
+            <a href="https://www.linkedin.com/in/vedika-srivastava/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/vedikaSrivastava" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://scholar.google.com/citations?user=cPLpZOYAAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+        </div>
     </footer>
+
+    <script src="./assets/script.js"></script>
 </body>
 </html>
