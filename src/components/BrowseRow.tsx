@@ -1,18 +1,18 @@
-import type { PortfolioItem } from '../data/portfolio.ts';
+import type { BrowseRowVariant, ContentItem } from '../types/content.ts';
 import { useInView } from '../hooks/useInView.ts';
 
-type ContentRowProps = {
+type BrowseRowProps = {
   sectionId: string;
   eyebrow: string;
   title: string;
-  items: PortfolioItem[];
-  onOpen: (item: PortfolioItem) => void;
+  items: ContentItem[];
+  onOpen: (item: ContentItem) => void;
   subtitle?: string;
-  variant?: 'standard' | 'wide' | 'compact';
+  variant?: BrowseRowVariant;
   ranked?: boolean;
 };
 
-export default function ContentRow({
+export default function BrowseRow({
   sectionId,
   eyebrow,
   title,
@@ -21,7 +21,7 @@ export default function ContentRow({
   onOpen,
   variant = 'standard',
   ranked = false,
-}: ContentRowProps) {
+}: BrowseRowProps) {
   const { ref, isVisible } = useInView<HTMLElement>();
   const isEducationRow = sectionId === 'education';
 
@@ -35,14 +35,21 @@ export default function ContentRow({
       aria-labelledby={`${sectionId}-title`}
     >
       <div className="mb-3 max-w-4xl">
-        <p className="mb-2 text-[0.68rem] font-black tracking-[0.18em] text-signal-hot uppercase">{eyebrow}</p>
-        <h2 className="text-2xl leading-none font-black tracking-[-0.04em] sm:text-3xl" id={`${sectionId}-title`}>
+        <p className="mb-2 text-[0.68rem] font-black tracking-[0.18em] text-signal-hot uppercase">
+          {eyebrow}
+        </p>
+        <h2
+          className="text-2xl leading-none font-black tracking-[-0.04em] sm:text-3xl"
+          id={`${sectionId}-title`}
+        >
           {title}
         </h2>
-        {subtitle && <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70 sm:text-base">{subtitle}</p>}
+        {subtitle && (
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70 sm:text-base">{subtitle}</p>
+        )}
       </div>
       <div
-        className={`rail-scroll -mx-4 grid grid-flow-col gap-3 overflow-x-auto px-4 pt-3 pb-8 overscroll-x-contain sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12 ${
+        className={`rail-scroll -mx-4 grid grid-flow-col gap-3 overflow-x-auto px-4 pt-3 pb-8 overscroll-x-contain snap-x snap-mandatory sm:-mx-8 sm:px-8 sm:snap-none lg:-mx-12 lg:px-12 ${
           variant === 'wide' ? 'auto-cols-[clamp(17rem,34vw,24rem)]' : ''
         } ${variant === 'standard' ? 'auto-cols-[clamp(15rem,28vw,19rem)]' : ''} ${
           variant === 'compact' ? 'auto-cols-[clamp(14rem,24vw,17rem)]' : ''
@@ -51,7 +58,7 @@ export default function ContentRow({
       >
         {items.map((item, index) => (
           <button
-            className={`group relative grid origin-center overflow-hidden rounded-sm border border-line bg-card text-left shadow-stream transition duration-200 hover:z-10 hover:scale-[1.02] hover:border-white/40 hover:bg-card-hover hover:shadow-stream-lg focus-visible:z-10 focus-visible:scale-[1.02] focus-visible:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${
+            className={`group relative grid origin-center snap-start overflow-hidden rounded-sm border border-line bg-card text-left shadow-stream transition duration-200 hover:z-10 hover:scale-[1.02] hover:border-white/40 hover:bg-card-hover hover:shadow-stream-lg focus-visible:z-10 focus-visible:scale-[1.02] focus-visible:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${
               variant === 'wide' ? 'aspect-[5/6]' : ''
             } ${variant === 'standard' ? 'aspect-[5/6]' : ''} ${
               variant === 'compact' ? 'aspect-[4/5]' : ''
