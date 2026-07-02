@@ -12,6 +12,8 @@ export type ContentItem = {
   link?: string;
   linkLabel?: string;
   featured?: boolean;
+  /** Brand color used to tint the tile backdrop (e.g. school color). */
+  accent?: string;
 };
 
 export type ContentMetric = {
@@ -20,7 +22,6 @@ export type ContentMetric = {
 };
 
 export type SiteContent = {
-  featuredWork: ContentItem[];
   projects: ContentItem[];
   experience: ContentItem[];
   research: ContentItem[];
@@ -41,6 +42,7 @@ export type ContactLink = {
 export type BrowseRowVariant = 'standard' | 'wide' | 'compact';
 
 export type NavigationItem = {
+  id: string;
   label: string;
   href: string;
 };

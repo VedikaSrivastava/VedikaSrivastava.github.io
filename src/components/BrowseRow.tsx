@@ -1,5 +1,7 @@
+import type { CSSProperties } from 'react';
 import type { BrowseRowVariant, ContentItem } from '../types/content.ts';
 import { useInView } from '../hooks/useInView.ts';
+import SectionHeader from './SectionHeader.tsx';
 
 type BrowseRowProps = {
   sectionId: string;
@@ -24,41 +26,36 @@ export default function BrowseRow({
 }: BrowseRowProps) {
   const { ref, isVisible } = useInView<HTMLElement>();
   const isEducationRow = sectionId === 'education';
+  // Research tiles show publisher logos: contain them on a light backdrop
+  // (several marks are dark and would disappear on the dark card).
+  const isLogoTile = sectionId === 'research';
 
   return (
     <section
       ref={ref}
       id={sectionId}
-      className={`px-4 pb-12 transition-all duration-700 ease-out sm:px-8 lg:px-12 ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+      className={`section-reveal px-4 pb-12 sm:px-8 lg:px-12 ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
       }`}
       aria-labelledby={`${sectionId}-title`}
     >
-      <div className="mb-3 max-w-4xl">
-        <p className="mb-2 text-[0.68rem] font-black tracking-[0.18em] text-signal-hot uppercase">
-          {eyebrow}
-        </p>
-        <h2
-          className="text-2xl leading-none font-black tracking-[-0.04em] sm:text-3xl"
-          id={`${sectionId}-title`}
-        >
-          {title}
-        </h2>
-        {subtitle && (
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70 sm:text-base">{subtitle}</p>
-        )}
-      </div>
+      <SectionHeader
+        eyebrow={eyebrow}
+        title={title}
+        titleId={`${sectionId}-title`}
+        subtitle={subtitle}
+      />
       <div
-        className={`rail-scroll -mx-4 grid grid-flow-col gap-3 overflow-x-auto px-4 pt-3 pb-8 overscroll-x-contain snap-x snap-mandatory sm:-mx-8 sm:px-8 sm:snap-none lg:-mx-12 lg:px-12 ${
+        className={`rail-scroll grid grid-flow-col gap-3 overflow-x-auto overscroll-x-contain px-1 pt-4 pb-9 snap-x snap-mandatory sm:px-1.5 sm:snap-none ${
           variant === 'wide' ? 'auto-cols-[clamp(17rem,34vw,24rem)]' : ''
         } ${variant === 'standard' ? 'auto-cols-[clamp(15rem,28vw,19rem)]' : ''} ${
           variant === 'compact' ? 'auto-cols-[clamp(14rem,24vw,17rem)]' : ''
-        } ${ranked ? 'auto-cols-[clamp(17rem,32vw,22rem)]' : ''}`}
+        } ${ranked ? 'auto-cols-[clamp(17rem,32vw,22rem)] ps-2 sm:ps-3' : ''}`}
         role="list"
       >
         {items.map((item, index) => (
           <button
-            className={`group relative grid origin-center snap-start overflow-hidden rounded-sm border border-line bg-card text-left shadow-stream transition duration-200 hover:z-10 hover:scale-[1.02] hover:border-white/40 hover:bg-card-hover hover:shadow-stream-lg focus-visible:z-10 focus-visible:scale-[1.02] focus-visible:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${
+            className={`group row-card-trigger grid origin-center ${
               variant === 'wide' ? 'aspect-[5/6]' : ''
             } ${variant === 'standard' ? 'aspect-[5/6]' : ''} ${
               variant === 'compact' ? 'aspect-[4/5]' : ''
@@ -68,17 +65,22 @@ export default function BrowseRow({
             onClick={() => onOpen(item)}
             role="listitem"
           >
-            {ranked && (
-              <span className="pointer-events-none absolute bottom-2 left-[-0.55rem] z-20 text-7xl leading-none font-black tracking-[-0.12em] text-black opacity-80 [-webkit-text-stroke:1.5px_rgba(255,255,255,0.48)] sm:left-[-0.7rem] sm:text-8xl">
-                {index + 1}
-              </span>
-            )}
-            <span className="relative z-10 grid h-full min-w-0 overflow-hidden rounded-sm">
+            {ranked && <span className="rank-index">{index + 1}</span>}
+            <span className="row-card-surface relative z-10 grid h-full min-w-0 overflow-hidden">
               {item.image ? (
                 <img
                   className={`col-start-1 row-start-1 h-full w-full ${
-                    isEducationRow ? 'object-contain p-10' : 'object-cover'
+                    isEducationRow
+                      ? 'logo-tile-art object-contain px-14 pt-8 pb-32 drop-shadow-[0_18px_28px_rgba(0,0,0,0.65)] transition-transform duration-300 ease-out group-hover:scale-[1.06]'
+                      : isLogoTile
+                        ? 'bg-[#f5f5f1] object-contain px-7 pt-6 pb-28'
+                        : 'object-cover'
                   }`}
+                  style={
+                    isEducationRow && item.accent
+                      ? ({ '--tile-accent': item.accent } as CSSProperties)
+                      : undefined
+                  }
                   src={item.image}
                   alt=""
                   loading="lazy"
@@ -88,14 +90,17 @@ export default function BrowseRow({
                   {item.title.slice(0, 2)}
                 </span>
               )}
+              {/* `relative` keeps these above the image: its drop-shadow filter
+                  creates a stacking context that otherwise paints over
+                  non-positioned siblings. */}
               <span
-                className={`col-start-1 row-start-1 ${
-                  isEducationRow
-                    ? 'bg-[linear-gradient(180deg,rgba(24,24,24,0.9),rgba(12,12,12,0.5)_48%,rgba(0,0,0,0.95)_100%)]'
+                className={`relative col-start-1 row-start-1 ${
+                  isEducationRow || isLogoTile
+                    ? 'bg-linear-to-b from-black/0 from-45% to-black/96'
                     : 'bg-linear-to-b from-black/0 from-20% via-black/35 via-50% to-black/95'
                 }`}
               />
-              <span className="col-start-1 row-start-1 flex min-w-0 flex-col justify-end p-3">
+              <span className="relative col-start-1 row-start-1 flex min-w-0 flex-col justify-end p-3">
                 <span className="flex h-6 max-w-full items-center self-start truncate rounded-sm bg-signal px-2 text-[0.58rem] font-black tracking-wider text-white uppercase sm:text-[0.62rem]">
                   {item.rating ?? item.tags[0]}
                 </span>

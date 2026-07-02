@@ -98,12 +98,7 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
             </ul>
           </div>
           {item.link && (
-            <a
-              className="inline-flex min-h-11 w-full items-center justify-center rounded-sm bg-white px-5 py-3 text-sm font-black text-void transition hover:-translate-y-0.5 hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto"
-              href={item.link}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="btn-primary" href={item.link} target="_blank" rel="noreferrer">
               {item.linkLabel ?? 'Open link'}
             </a>
           )}

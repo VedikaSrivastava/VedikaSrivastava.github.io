@@ -5,6 +5,28 @@ type HeroSectionProps = {
   onOpen: (item: ContentItem) => void;
 };
 
+function PlayIcon() {
+  return (
+    <svg aria-hidden="true" className="h-4 w-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M6 4.75c0-1.13 1.22-1.84 2.2-1.27l12.36 7.25c.97.57.97 1.97 0 2.54L8.2 20.52c-.98.57-2.2-.14-2.2-1.27V4.75Z" />
+    </svg>
+  );
+}
+
+function InfoIcon() {
+  return (
+    <svg aria-hidden="true" className="h-4.5 w-4.5 shrink-0" fill="none" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
+      <path
+        d="M12 11v5.2M12 7.6v.2"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
+
 export default function HeroSection({ item, onOpen }: HeroSectionProps) {
   if (!item) {
     return null;
@@ -13,15 +35,25 @@ export default function HeroSection({ item, onOpen }: HeroSectionProps) {
   return (
     <section
       id="top"
-      className="relative isolate min-h-[82svh] px-4 pt-28 pb-12 sm:min-h-[86svh] sm:px-8 sm:pt-32 sm:pb-18 lg:px-12"
+      className="relative isolate min-h-[82svh] px-4 pt-32 pb-12 sm:min-h-[86svh] sm:px-8 sm:pt-36 sm:pb-18 lg:px-12 lg:pt-28"
       aria-labelledby="hero-title"
     >
-      <div className="absolute inset-0 -z-20 animate-hero-drift bg-[radial-gradient(circle_at_72%_24%,rgba(229,9,20,0.18),transparent_22rem),linear-gradient(115deg,#050505_0%,#0c0c0c_42%,#172017_74%,#050505_100%)] opacity-100" />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(0,0,0,0.98),rgba(0,0,0,0.78)_38%,rgba(0,0,0,0.22)_72%),linear-gradient(0deg,#050505,transparent_30%)]" />
-      <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_21rem]">
+      {/* Soft signal glow only — fades to transparent so it blends into the
+          page background with no visible seam at the section edge. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_75rem_38rem_at_82%_-12%,rgba(229,9,20,0.15),transparent_62%)]"
+      />
+
+      <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_23rem]">
         <div className="max-w-4xl">
-          <p className="mb-4 text-xs font-black tracking-[0.18em] text-signal-hot uppercase">
-            Production AI Systems
+          <p className="mb-4 flex items-center gap-2.5">
+            <span className="text-2xl leading-none font-black tracking-[-0.08em] text-signal-hot">
+              VS
+            </span>
+            <span className="text-[0.65rem] font-black tracking-[0.34em] text-white/55 uppercase sm:text-xs">
+              An Original Series
+            </span>
           </p>
           <h1
             id="hero-title"
@@ -32,9 +64,30 @@ export default function HeroSection({ item, onOpen }: HeroSectionProps) {
           <p className="mt-4 text-[clamp(1.75rem,5vw,3rem)] leading-none font-black tracking-[-0.04em] text-white">
             Senior Applied AI Engineer
           </p>
-          <p className="mt-3 text-sm leading-6 font-bold text-muted sm:text-base md:text-xl">
-            Production LLM Systems · Agentic Workflows · Multi-Tenant SaaS
-          </p>
+
+          <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm font-bold sm:text-base">
+            <span className="text-[#46d369]">98% Match</span>
+            <span className="text-white/60">2020–2026</span>
+            <span className="text-white/60">8 Seasons</span>
+            <span className="rounded-[2px] border border-white/35 px-1.5 text-[0.65rem] leading-4 font-bold text-white/60">
+              HD
+            </span>
+            <span className="text-xs font-semibold text-white/35 italic">
+              the missing 2% is me asking if it could&apos;ve shipped faster
+            </span>
+          </div>
+
+          <div className="mt-4 flex items-center gap-2.5">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[3px] bg-signal text-center text-[0.5rem] leading-[1.05] font-black tracking-wide text-white uppercase shadow-signal-sm">
+              Top
+              <br />
+              10
+            </span>
+            <span className="text-sm font-bold text-white sm:text-base">
+              #1 in AI That Actually Ships Today
+            </span>
+          </div>
+
           <p className="mt-5 max-w-3xl text-base leading-7 text-white/82 sm:text-lg">
             I build AI that actually ships—not slide-deck demos. Lately that means LangGraph agents,
             RAG pipelines, and the unglamorous work that keeps them running: evals, observability,
@@ -45,57 +98,47 @@ export default function HeroSection({ item, onOpen }: HeroSectionProps) {
             founding-team engineering. Still the person who will debug a broken Meta API webhook at
             midnight and sketch ideas on paper the next morning.
           </p>
+
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a
-              className="inline-flex min-h-11 w-full items-center justify-center rounded-sm bg-white px-5 py-3 text-sm font-black text-void transition hover:-translate-y-0.5 hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto"
-              href="#work"
-            >
-              View work
+            <a className="btn-primary" href="#experience" aria-label="Play — jump to experience">
+              <PlayIcon />
+              Play
             </a>
-            <button
-              className="inline-flex min-h-11 w-full items-center justify-center rounded-sm bg-white/10 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto"
-              type="button"
-              onClick={() => onOpen(item)}
-            >
-              More info
+            <button className="btn-secondary" type="button" onClick={() => onOpen(item)}>
+              <InfoIcon />
+              More Info
             </button>
           </div>
-          <div className="mt-6 flex flex-wrap gap-2" aria-label="Core tags">
-            {[
-              'LLM Systems',
-              'Agentic AI',
-              'RAG',
-              'ML Platforms',
-              'Multi-Tenant SaaS',
-              'Full-Stack AI',
-              'Healthcare AI',
-            ].map((highlight) => (
-              <span
-                className="rounded-sm border border-line bg-white/8 px-2.5 py-1.5 text-xs font-bold text-white/75"
-                key={highlight}
-              >
-                {highlight}
-              </span>
-            ))}
-          </div>
         </div>
-        <aside className="rounded-md border border-line bg-panel/75 p-5 shadow-stream backdrop-blur-xl">
-          <p className="mb-3 text-xs font-black tracking-[0.16em] text-signal-hot uppercase">
-            Core areas
-          </p>
-          <ul className="grid gap-3 text-sm font-semibold text-white/82">
-            {[
-              'Production LLM systems',
-              'Agentic AI workflows',
-              'Multi-tenant SaaS platforms',
-              'Healthcare AI research',
-              'Full-stack AI products',
-            ].map((area) => (
-              <li className="border-b border-line pb-3 last:border-b-0 last:pb-0" key={area}>
-                {area}
-              </li>
-            ))}
-          </ul>
+
+        <aside className="rounded-md border border-line bg-panel/75 p-5 text-sm leading-6 shadow-stream backdrop-blur-xl">
+          <dl className="grid gap-3.5">
+            <div>
+              <dt className="inline font-semibold text-white/45">Starring: </dt>
+              <dd className="inline font-semibold text-white/85">
+                LangGraph agents, RAG pipelines, evals that actually run, PyTorch, TypeScript
+              </dd>
+            </div>
+            <div>
+              <dt className="inline font-semibold text-white/45">Genres: </dt>
+              <dd className="inline font-semibold text-white/85">
+                Production LLM Systems, Agentic Workflows, Multi-Tenant SaaS, Healthcare AI
+              </dd>
+            </div>
+            <div>
+              <dt className="inline font-semibold text-white/45">Created by: </dt>
+              <dd className="inline font-semibold text-white/85">
+                a CS degree, a BU master&apos;s, and an unreasonable number of midnight debugging
+                sessions
+              </dd>
+            </div>
+            <div>
+              <dt className="inline font-semibold text-white/45">This engineer is: </dt>
+              <dd className="inline font-semibold text-white/85">
+                intense, chaotic-honest, allergic to &ldquo;good enough&rdquo;
+              </dd>
+            </div>
+          </dl>
         </aside>
       </div>
     </section>

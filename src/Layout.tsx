@@ -12,35 +12,15 @@ const ExperienceRow = lazy(() => import('./components/ExperienceRow.tsx'));
 
 export default function Layout() {
   const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
-  const heroFeaturedItem = useMemo(
-    () => siteContent.featuredWork.find((item) => item.featured) ?? siteContent.featuredWork[0],
-    [],
-  );
+  const heroSpotlightItem = useMemo(() => siteContent.experience[0], []);
 
   return (
     <div className="min-h-dvh overflow-x-hidden bg-void bg-[radial-gradient(circle_at_top_left,rgba(229,9,20,0.16),transparent_30rem),linear-gradient(180deg,#050505_0%,#050505_62%,#020202_100%)] font-sans text-copy">
       <SiteHeader />
       <main>
-        <HeroSection item={heroFeaturedItem} onOpen={setSelectedItem} />
+        <HeroSection item={heroSpotlightItem} onOpen={setSelectedItem} />
         <Suspense fallback={<SectionLoadingFallback label="Loading site sections" />}>
-          <BrowseRow
-            sectionId="work"
-            eyebrow="Featured Work"
-            title="Production and AI Systems"
-            subtitle="The work I'd put on if someone asked 'show me what you actually built'—not the buzzword version."
-            items={siteContent.featuredWork}
-            onOpen={setSelectedItem}
-            variant="wide"
-          />
           <ExperienceRow items={siteContent.experience} onOpen={setSelectedItem} />
-          <BrowseRow
-            sectionId="projects"
-            eyebrow="Selected AI Projects"
-            title="Projects"
-            subtitle="Side quests and deep dives—from ISS geolocation and Sanskrit voice bots to Arduino traps and traffic lights."
-            items={siteContent.projects}
-            onOpen={setSelectedItem}
-          />
           <BrowseRow
             sectionId="research"
             eyebrow="Research"
@@ -49,6 +29,14 @@ export default function Layout() {
             items={siteContent.research}
             onOpen={setSelectedItem}
             variant="compact"
+          />
+          <BrowseRow
+            sectionId="projects"
+            eyebrow="Selected AI Projects"
+            title="Projects"
+            subtitle="Side quests and deep dives—from ISS geolocation and Sanskrit voice bots to Arduino traps and traffic lights."
+            items={siteContent.projects}
+            onOpen={setSelectedItem}
           />
           <BrowseRow
             sectionId="skills"

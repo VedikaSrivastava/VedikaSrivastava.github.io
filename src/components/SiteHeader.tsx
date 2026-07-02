@@ -1,9 +1,54 @@
-import { useEffect, useState } from 'react';
-import { primaryNavigation } from '../content/navigation.ts';
+import { useEffect, useRef, useState } from 'react';
+import { observedSectionIds, siteNavigation } from '../content/navigation.ts';
+import { useActiveSection } from '../hooks/useActiveSection.ts';
+import { useNavIndicator } from '../hooks/useNavIndicator.ts';
+
+function SectionNav({ activeSection }: { activeSection: string | null }) {
+  const navRef = useRef<HTMLElement>(null);
+  const indicatorRef = useRef<HTMLSpanElement>(null);
+  const linkRefs = useRef(new Map<string, HTMLAnchorElement>());
+  useNavIndicator(activeSection, navRef, indicatorRef, linkRefs);
+
+  return (
+    <nav
+      ref={navRef}
+      className="header-nav-scroll relative flex w-full min-w-0 items-center overflow-x-auto overscroll-x-contain lg:overflow-visible"
+      aria-label="Section navigation"
+    >
+      <span ref={indicatorRef} aria-hidden="true" className="nav-indicator" />
+
+      <div className="relative z-10 flex w-max gap-1 lg:w-auto lg:pe-0 pe-4">
+        {siteNavigation.map((item) => {
+          const isActive = activeSection === item.id;
+
+          return (
+            <a
+              ref={(element) => {
+                if (element) {
+                  linkRefs.current.set(item.id, element);
+                } else {
+                  linkRefs.current.delete(item.id);
+                }
+              }}
+              className={`interactive focus-ring-nav shrink-0 rounded-full px-3 py-2 text-xs font-bold tracking-wide sm:px-3.5 sm:text-sm ${
+                isActive ? 'text-white' : 'text-white/55 hover:text-white/90'
+              }`}
+              href={item.href}
+              key={item.id}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
 
 export default function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const activeSection = useActiveSection(observedSectionIds);
 
   useEffect(() => {
     const updateHeader = () => setIsScrolled(window.scrollY > 24);
@@ -12,115 +57,40 @@ export default function SiteHeader() {
     return () => window.removeEventListener('scroll', updateHeader);
   }, []);
 
-  useEffect(() => {
-    document.body.classList.toggle('overflow-hidden', isMenuOpen);
-    return () => document.body.classList.remove('overflow-hidden');
-  }, [isMenuOpen]);
-
-  useEffect(() => {
-    const closeMenu = () => setIsMenuOpen(false);
-    window.addEventListener('hashchange', closeMenu);
-    return () => window.removeEventListener('hashchange', closeMenu);
-  }, []);
-
   return (
     <header
-      className={`fixed top-0 left-0 z-20 w-full pt-[env(safe-area-inset-top,0px)] transition-all duration-200 ease-out ${
-        isScrolled || isMenuOpen
-          ? 'border-b border-line bg-void/95 backdrop-blur-xl'
-          : 'bg-linear-to-b from-black/90 to-transparent'
+      className={`fixed top-0 left-0 z-20 w-full pt-[env(safe-area-inset-top,0px)] ${
+        isScrolled ? 'bg-void/96' : 'bg-linear-to-b from-void/95 via-void/70 to-transparent'
       }`}
     >
-      <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 px-4 py-3 sm:gap-5 sm:px-8 lg:px-12">
+      <div className="flex items-center gap-3 px-4 py-3 sm:gap-5 sm:px-8 lg:gap-8 lg:px-12">
         <a
-          className="inline-flex min-w-0 items-center gap-3 font-black tracking-[-0.04em]"
+          className="group interactive inline-flex shrink-0 items-center gap-3.5 hover:-translate-y-px sm:gap-4"
           href="#top"
           aria-label="Vedika Srivastava home"
-          onClick={() => setIsMenuOpen(false)}
         >
-          <span className="grid size-9 shrink-0 place-items-center rounded-sm bg-signal text-xs shadow-[0_0_28px_rgba(229,9,20,0.45)]">
-            VS
+          <span className="logo-mark">
+            <span className="text-sm font-black tracking-[-0.06em] text-white sm:text-base">
+              VS
+            </span>
+            <span className="pointer-events-none absolute inset-0 rounded-[0.2rem] ring-1 ring-white/25 ring-inset" />
           </span>
-          <span className="hidden truncate text-xl text-signal-hot uppercase sm:inline lg:text-2xl">
-            Vedika
+          <span className="hidden min-w-0 flex-col leading-none sm:flex">
+            <span className="text-[1.35rem] font-black tracking-[0.06em] text-signal-hot uppercase lg:text-[1.55rem]">
+              Vedika
+            </span>
+            <span className="mt-1.5 text-[0.62rem] font-bold tracking-[0.28em] text-white/42 uppercase lg:text-[0.68rem]">
+              Srivastava
+            </span>
           </span>
         </a>
 
-        <nav
-          className="hidden items-center justify-center gap-5 text-sm font-semibold text-white/80 md:flex lg:gap-6"
-          aria-label="Primary navigation"
-        >
-          {primaryNavigation.map((item) => (
-            <a
-              className="transition hover:-translate-y-px hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-              key={item.href}
-              href={item.href}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        <span aria-hidden="true" className="hidden h-9 w-px shrink-0 bg-line/80 lg:block" />
 
-        <div className="flex items-center justify-end gap-2">
-          <button
-            className="inline-flex size-11 items-center justify-center rounded-sm border border-line bg-white/8 text-white transition hover:bg-white/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:hidden"
-            type="button"
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-nav"
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            onClick={() => setIsMenuOpen((open) => !open)}
-          >
-            <span className="relative block h-3.5 w-4">
-              <span
-                className={`absolute left-0 h-0.5 w-4 bg-current transition-transform duration-200 ${
-                  isMenuOpen ? 'top-[0.42rem] rotate-45' : 'top-0'
-                }`}
-              />
-              <span
-                className={`absolute top-[0.42rem] left-0 h-0.5 w-4 bg-current transition-opacity duration-200 ${
-                  isMenuOpen ? 'opacity-0' : 'opacity-100'
-                }`}
-              />
-              <span
-                className={`absolute left-0 h-0.5 w-4 bg-current transition-transform duration-200 ${
-                  isMenuOpen ? 'top-[0.42rem] -rotate-45' : 'top-[0.84rem]'
-                }`}
-              />
-            </span>
-          </button>
-
-          <a
-            className="inline-flex min-h-11 items-center justify-center rounded-sm bg-white px-3 text-xs font-black text-void transition hover:-translate-y-px hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:px-4 sm:text-sm"
-            href="#contact"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            <span className="sm:hidden">Contact</span>
-            <span className="hidden sm:inline">Get in touch</span>
-          </a>
+        <div className="min-w-0 flex-1">
+          <SectionNav activeSection={activeSection} />
         </div>
       </div>
-
-      {isMenuOpen && (
-        <nav
-          className="border-t border-line px-4 py-3 md:hidden"
-          id="mobile-nav"
-          aria-label="Mobile navigation"
-        >
-          <ul className="grid gap-1">
-            {primaryNavigation.map((item) => (
-              <li key={item.href}>
-                <a
-                  className="flex min-h-11 items-center rounded-sm px-3 text-base font-semibold text-white/85 transition hover:bg-white/8 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      )}
     </header>
   );
 }

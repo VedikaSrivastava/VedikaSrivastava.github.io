@@ -3,7 +3,7 @@ import type { ContactPlatform } from '../types/content.ts';
 import { useInView } from '../hooks/useInView.ts';
 
 function ContactIcon({ platform }: { platform: ContactPlatform }) {
-  const className = 'h-4 w-4 shrink-0';
+  const className = 'h-9 w-9 shrink-0 sm:h-10 sm:w-10';
 
   switch (platform) {
     case 'email':
@@ -12,13 +12,13 @@ function ContactIcon({ platform }: { platform: ContactPlatform }) {
           <path
             d="M4 6.5h16a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 16V8A1.5 1.5 0 0 1 4 6.5Z"
             stroke="currentColor"
-            strokeWidth="1.6"
+            strokeWidth="1.5"
           />
           <path
             d="m4.5 8 7.1 5.1a1 1 0 0 0 1.2 0L20 8"
             stroke="currentColor"
             strokeLinecap="round"
-            strokeWidth="1.6"
+            strokeWidth="1.5"
           />
         </svg>
       );
@@ -43,10 +43,36 @@ function ContactIcon({ platform }: { platform: ContactPlatform }) {
     case 'medium':
       return (
         <svg aria-hidden="true" className={className} fill="currentColor" viewBox="0 0 24 24">
-          <path d="M4.5 7.2c3.1-.1 5.5-.5 7.2-1.2 1.7-.7 2.8-1.7 3.3-3 .5 1.3 1.6 2.3 3.3 3 .7.3 1.5.5 2.4.7V16c-1.6.4-3.2.6-4.8.6-1.6 0-3.2-.2-4.8-.6V7.2Zm0 9.1c1.5.4 3.1.6 4.8.6 1.7 0 3.3-.2 4.8-.6v1.6c-1.5.4-3.1.6-4.8.6-1.7 0-3.3-.2-4.8-.6v-1.6Z" />
+          <path d="M4.285 7.76a.573.573 0 0 0-.568.568v8.092a.573.573 0 0 0 .568.568h.568a.573.573 0 0 0 .568-.568V8.328a.573.573 0 0 0-.568-.568h-.568zm4.26 0a.573.573 0 0 0-.568.568v8.092a.573.573 0 0 0 .568.568h.568a.573.573 0 0 0 .568-.568V8.328a.573.573 0 0 0-.568-.568h-.568zm4.26 0a.573.573 0 0 0-.568.568v8.092a.573.573 0 0 0 .568.568h.568a.573.573 0 0 0 .568-.568V8.328a.573.573 0 0 0-.568-.568h-.568z" />
         </svg>
       );
   }
+}
+
+type ContactTileProps = {
+  href: string;
+  label: string;
+  platform: ContactPlatform;
+  className?: string;
+};
+
+function ContactTile({ href, label, platform, className = '' }: ContactTileProps) {
+  return (
+    <a
+      className={`group flex flex-col gap-2.5 focus-ring ${className}`}
+      href={href}
+      target={href.startsWith('http') ? '_blank' : undefined}
+      rel={href.startsWith('http') ? 'noreferrer' : undefined}
+      aria-label={label}
+    >
+      <span className="contact-tile-surface" data-platform={platform}>
+        <span className="contact-tile-accent" data-platform={platform}>
+          <ContactIcon platform={platform} />
+        </span>
+      </span>
+      <span className="contact-tile-label">{label}</span>
+    </a>
+  );
 }
 
 export default function SiteFooter() {
@@ -56,37 +82,47 @@ export default function SiteFooter() {
     <footer
       ref={ref}
       id="contact"
-      className={`border-t border-line/60 px-4 pb-[calc(3rem+env(safe-area-inset-bottom,0px))] pt-10 transition-all duration-700 ease-out sm:px-8 lg:px-12 ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+      className={`section-reveal relative isolate border-t border-line/60 px-4 pb-[calc(3rem+env(safe-area-inset-bottom,0px))] pt-10 sm:px-8 lg:px-12 ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
       }`}
     >
-      <div className="mb-5 max-w-4xl">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 footer-glow" />
+
+      <div className="mb-5 max-w-4xl border-l-2 border-signal/80 pl-4 sm:pl-5">
         <p className="mb-2 text-[0.68rem] font-black tracking-[0.18em] text-signal-hot uppercase">
           Contact
         </p>
         <h2 className="text-2xl leading-none font-black tracking-[-0.04em] sm:text-3xl">
           Let&apos;s connect
         </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-white/70 sm:text-base">
-          Open to senior applied AI roles, research collaborations, and problems worth losing sleep
-          over.
-        </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
+      <div className="hidden grid-cols-5 gap-3 sm:grid sm:gap-4 lg:gap-5">
         {contactLinks.map((link) => (
-          <a
-            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-sm border border-line bg-white/8 px-3 py-3 text-xs font-bold text-white/85 transition hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/12 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto sm:justify-start sm:gap-2.5 sm:px-4 sm:text-sm"
+          <ContactTile
             key={link.href}
             href={link.href}
-            target={link.href.startsWith('http') ? '_blank' : undefined}
-            rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-          >
-            <ContactIcon platform={link.platform} />
-            <span className="truncate sm:hidden">{link.shortLabel ?? link.label}</span>
-            <span className="hidden truncate sm:inline">{link.label}</span>
-          </a>
+            label={link.shortLabel ?? link.label}
+            platform={link.platform}
+          />
         ))}
+      </div>
+
+      <div
+        className="rail-scroll overflow-x-auto overscroll-x-contain pb-1 sm:hidden"
+        aria-label="Contact links"
+      >
+        <div className="flex w-max gap-3">
+          {contactLinks.map((link) => (
+            <ContactTile
+              className="w-[5.5rem]"
+              key={link.href}
+              href={link.href}
+              label={link.shortLabel ?? link.label}
+              platform={link.platform}
+            />
+          ))}
+        </div>
       </div>
     </footer>
   );

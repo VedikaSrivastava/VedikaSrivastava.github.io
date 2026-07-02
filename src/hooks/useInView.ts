@@ -18,7 +18,7 @@ export function useInView<TElement extends Element>() {
           observer.disconnect();
         }
       },
-      { rootMargin: '120px' },
+      { rootMargin: '180px' },
     );
 
     observer.observe(element);
