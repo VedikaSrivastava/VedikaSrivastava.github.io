@@ -23,6 +23,7 @@ export default function ContentRow({
   ranked = false,
 }: ContentRowProps) {
   const { ref, isVisible } = useInView<HTMLElement>();
+  const isEducationRow = sectionId === 'education';
 
   return (
     <section
@@ -61,19 +62,32 @@ export default function ContentRow({
             role="listitem"
           >
             {ranked && (
-              <span className="pointer-events-none absolute bottom-2 left-[-0.55rem] z-0 text-7xl leading-none font-black tracking-[-0.12em] text-black opacity-80 [-webkit-text-stroke:1.5px_rgba(255,255,255,0.48)] sm:left-[-0.7rem] sm:text-8xl">
+              <span className="pointer-events-none absolute bottom-2 left-[-0.55rem] z-20 text-7xl leading-none font-black tracking-[-0.12em] text-black opacity-80 [-webkit-text-stroke:1.5px_rgba(255,255,255,0.48)] sm:left-[-0.7rem] sm:text-8xl">
                 {index + 1}
               </span>
             )}
             <span className="relative z-10 grid h-full min-w-0 overflow-hidden rounded-sm">
               {item.image ? (
-                <img className="col-start-1 row-start-1 h-full w-full object-cover" src={item.image} alt="" loading="lazy" />
+                <img
+                  className={`col-start-1 row-start-1 h-full w-full ${
+                    isEducationRow ? 'object-contain p-10' : 'object-cover'
+                  }`}
+                  src={item.image}
+                  alt=""
+                  loading="lazy"
+                />
               ) : (
                 <span className="col-start-1 row-start-1 grid h-full place-items-center bg-[radial-gradient(circle_at_top_right,rgba(229,9,20,0.38),transparent_12rem),linear-gradient(135deg,#272727,#090909)] text-6xl font-black tracking-[-0.12em] text-white/16">
                   {item.title.slice(0, 2)}
                 </span>
               )}
-              <span className="col-start-1 row-start-1 bg-linear-to-b from-black/0 from-20% via-black/35 via-50% to-black/95" />
+              <span
+                className={`col-start-1 row-start-1 ${
+                  isEducationRow
+                    ? 'bg-[linear-gradient(180deg,rgba(24,24,24,0.9),rgba(12,12,12,0.5)_48%,rgba(0,0,0,0.95)_100%)]'
+                    : 'bg-linear-to-b from-black/0 from-20% via-black/35 via-50% to-black/95'
+                }`}
+              />
               <span className="col-start-1 row-start-1 flex min-w-0 flex-col justify-end p-3">
                 <span className="flex h-6 max-w-full items-center self-start truncate rounded-sm bg-signal px-2 text-[0.58rem] font-black tracking-wider text-white uppercase sm:text-[0.62rem]">
                   {item.rating ?? item.tags[0]}

@@ -4,6 +4,7 @@ export type PortfolioItem = {
   id: string;
   title: string;
   subtitle: string;
+  location?: string;
   period?: string;
   image?: string;
   rating?: string;
@@ -303,7 +304,8 @@ export const portfolio: PortfolioData = {
     {
       id: 'extuitive',
       title: 'Machine Learning Engineer II, Founding Team',
-      subtitle: 'Extuitive / Flagship Pioneering, Boston, MA',
+      subtitle: 'Extuitive / Flagship Pioneering',
+      location: 'Boston, MA',
       period: 'Jun 2025 - Jun 2026',
       rating: 'Primary Role',
       tags: ['LangGraph', 'TypeScript', 'Next.js', 'React', 'Node.js', 'Supabase', 'Postgres', 'Inngest', 'AWS Lambda', 'Stripe', 'Anrok', 'Meta API', 'Shopify', 'HubSpot', 'Sentry', 'PostHog'],
@@ -321,7 +323,8 @@ export const portfolio: PortfolioData = {
     {
       id: 'bu-bmc',
       title: 'Research Scientist',
-      subtitle: 'Boston University / Boston Medical Center, Boston, MA',
+      subtitle: 'Boston University / Boston Medical Center',
+      location: 'Boston, MA',
       period: 'Sep 2024 - Jun 2025',
       rating: 'Healthcare AI',
       tags: ['PyTorch', 'CUDA', 'Transformers', 'LSTMs', 'EEG', 'Clinical AI', 'Time Series', 'Knowledge Graphs', 'RAG', 'PubMed', 'Optuna', 'HyperOpt'],
@@ -337,7 +340,8 @@ export const portfolio: PortfolioData = {
     {
       id: 'bespoke-care',
       title: 'Lead AI Engineer',
-      subtitle: 'BeSpoke Care Inc., My Phoenyx, Boston, MA',
+      subtitle: 'BeSpoke Care Inc., My Phoenyx',
+      location: 'Boston, MA',
       period: 'Jun 2024 - Feb 2025',
       rating: 'Product AI',
       tags: ['My Phoenyx', 'AutoGen', 'Azure OpenAI', 'FastAPI', 'WebSockets', 'Gemini', 'GPT', 'AWS Polly', 'Dialogflow CX', 'Ludwig', 'AWS', 'Raspberry Pi', 'ESP32'],
@@ -354,6 +358,7 @@ export const portfolio: PortfolioData = {
       id: 'time-machine-learning',
       title: 'AI Engineer',
       subtitle: 'Time Machine Learning Inc.',
+      location: 'Boston, MA',
       period: 'Mar 2024 - Jun 2024',
       tags: ['RAG', 'Vector Search', 'Mistral', 'Azure MLOps', 'Python', 'SaaS'],
       summary:
@@ -367,7 +372,8 @@ export const portfolio: PortfolioData = {
     {
       id: 'igs-nrel',
       title: 'Data Science Fellow',
-      subtitle: 'Institute for Global Sustainability / NREL, Boston, MA',
+      subtitle: 'Institute for Global Sustainability / NREL',
+      location: 'Boston, MA',
       period: 'May 2023 - Jul 2023',
       tags: ['Python', 'scikit-learn', 'spaCy', 'Plotly', 'Data Science', 'Policy Analytics'],
       summary:
@@ -381,7 +387,8 @@ export const portfolio: PortfolioData = {
     {
       id: 'bu-teaching-assistant',
       title: 'Teaching Assistant',
-      subtitle: 'Boston University, Boston, MA',
+      subtitle: 'Boston University',
+      location: 'Boston, MA',
       period: 'Jan 2023 - Dec 2023',
       tags: ['Teaching', 'Mentorship', 'AI', 'ML', 'Python', 'TensorFlow', 'NLP'],
       summary:
@@ -395,7 +402,8 @@ export const portfolio: PortfolioData = {
     {
       id: 'ibm',
       title: 'SDE Intern',
-      subtitle: 'IBM, Pune, India',
+      subtitle: 'IBM',
+      location: 'Pune, India',
       period: 'Jan 2022 - Jul 2022',
       tags: ['Java', 'Quarkus', 'OpenJDK', 'Microservices', 'Backend Engineering'],
       summary:
@@ -409,7 +417,8 @@ export const portfolio: PortfolioData = {
     {
       id: 'tech-mahindra',
       title: 'NLP Research Intern',
-      subtitle: 'Tech Mahindra, Pune, India',
+      subtitle: 'Tech Mahindra',
+      location: 'Pune, India',
       period: 'Oct 2020 - Jan 2021',
       tags: ['NLP', 'Python', 'BeautifulSoup', 'NLTK', 'Multilingual AI'],
       summary:
@@ -560,8 +569,11 @@ export const portfolio: PortfolioData = {
     {
       id: 'bu-ms-ai',
       title: 'M.S. Artificial Intelligence',
-      subtitle: 'Boston University, Boston, MA',
+      subtitle: 'Boston University',
+      location: 'Boston, MA',
+      image: images.buTerrier,
       period: 'GPA 3.84 / 4.00',
+      rating: 'Boston University',
       tags: ['AI', 'ML', 'NLP', 'Computer Vision'],
       summary:
         'Graduate study focused on artificial intelligence, machine learning, NLP, computer vision, and applied data science.',
@@ -571,7 +583,10 @@ export const portfolio: PortfolioData = {
       id: 'mitwpu-btech',
       title: 'B.Tech. Electronics and Communication Engineering, AI Minor',
       subtitle: 'MIT World Peace University',
+      location: 'Pune, India',
+      image: images.mitwpuLogo,
       period: 'CGPA 9.79 / 10, Bronze Medalist',
+      rating: 'MIT-WPU',
       tags: ['ECE', 'AI Minor', 'Bronze Medalist'],
       summary:
         'Engineering foundation across electronics, signal processing, embedded systems, machine learning, and AI.',

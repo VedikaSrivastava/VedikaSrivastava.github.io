@@ -35,7 +35,7 @@ export default function ExperienceTimeline({ items, onOpen }: ExperienceTimeline
             type="button"
             onClick={() => onOpen(item)}
           >
-            <span className="pointer-events-none absolute bottom-2 left-[-0.55rem] z-0 text-7xl leading-none font-black tracking-[-0.12em] text-black opacity-80 [-webkit-text-stroke:1.5px_rgba(255,255,255,0.48)] sm:left-[-0.7rem] sm:text-8xl">
+            <span className="pointer-events-none absolute bottom-2 left-[-0.55rem] z-20 text-7xl leading-none font-black tracking-[-0.12em] text-black opacity-80 [-webkit-text-stroke:1.5px_rgba(255,255,255,0.48)] sm:left-[-0.7rem] sm:text-8xl">
               {index + 1}
             </span>
             <span className="relative z-10 flex aspect-[5/6] min-w-0 flex-col overflow-hidden rounded-sm border border-line bg-card p-4 shadow-stream transition group-hover:border-white/35 group-hover:bg-card-hover">
@@ -45,8 +45,9 @@ export default function ExperienceTimeline({ items, onOpen }: ExperienceTimeline
               <span className="mt-3 min-h-[3.6rem] text-sm leading-tight font-black text-white sm:text-base">
                 <span className="line-clamp-2">{item.title}</span>
               </span>
-              <span className="mt-1 min-h-[2.6rem] text-xs leading-4 font-semibold text-muted">
-                <span className="line-clamp-2">{item.subtitle}</span>
+              <span className="mt-1 min-h-[3.7rem] text-xs leading-4 font-semibold text-muted">
+                <span className="line-clamp-2 block">{item.subtitle}</span>
+                {item.location && <span className="mt-1 block line-clamp-1">{item.location}</span>}
               </span>
               <span className="mt-3 text-xs leading-5 text-white/70">
                 <span className="line-clamp-4">{item.summary}</span>

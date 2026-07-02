@@ -37,7 +37,7 @@ export default function Header() {
           </a>
         ))}
       </nav>
-      <a className="justify-self-end whitespace-nowrap rounded-sm bg-white px-3 py-2 text-xs font-black text-void transition hover:-translate-y-px hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:px-4" href="mailto:vedikas3012@gmail.com">
+      <a className="justify-self-end whitespace-nowrap rounded-sm bg-white px-3 py-2 text-xs font-black text-void transition hover:-translate-y-px hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:px-4" href="#contact">
         Get in touch
       </a>
     </header>
