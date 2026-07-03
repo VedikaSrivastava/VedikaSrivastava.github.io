@@ -5,9 +5,7 @@
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   --color-void: #050505;
-  --color-ink: #0b0b0b;
   --color-panel: #111111;
-  --color-panel-soft: #171717;
   --color-card: #141414;
   --color-card-hover: #1f1f1f;
   --color-line: rgba(255, 255, 255, 0.12);
@@ -24,14 +22,11 @@
   --color-brand-medium: #00ab6c;
 
   --color-rank-stroke: rgb(255 255 255 / 0.48);
-  --color-scroll-thumb: rgb(255 255 255 / 0.2);
-  --color-scroll-thumb-hover: rgb(255 255 255 / 0.28);
 
   --shadow-stream: 0 24px 80px rgba(0, 0, 0, 0.55);
   --shadow-stream-lg: 0 28px 90px rgba(0, 0, 0, 0.72);
   --shadow-signal-sm: 0 0 18px color-mix(in srgb, var(--color-signal) 45%, transparent);
   --shadow-signal-md: 0 0 32px color-mix(in srgb, var(--color-signal) 42%, transparent);
-  --shadow-signal-lg: 0 0 40px color-mix(in srgb, var(--color-signal) 55%, transparent);
 
   --ease-stream: cubic-bezier(0.2, 0.8, 0.2, 1);
   --duration-interactive: 200ms;
@@ -40,7 +35,6 @@
   --duration-nav: 300ms;
 
   --animate-modal-in: modal-in var(--duration-modal) var(--ease-stream);
-  --animate-shimmer: shimmer 1.2s linear infinite;
 }
 
 @keyframes modal-in {
@@ -52,12 +46,6 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes shimmer {
-  to {
-    background-position: -200% 0;
   }
 }
 
@@ -212,11 +200,6 @@
     transition-duration: var(--duration-interactive);
   }
 
-  .btn-lift {
-    @apply transition hover:-translate-y-0.5;
-    transition-duration: var(--duration-interactive);
-  }
-
   .btn-primary {
     @apply inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-sm bg-white px-6 py-3 text-sm font-black text-void hover:bg-white/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto;
     @apply transition-[background-color];
@@ -240,8 +223,8 @@
   }
 
   .logo-mark {
-    @apply relative grid size-10 place-items-center rounded-[0.2rem] bg-signal shadow-signal-md group-hover:shadow-signal-lg sm:size-11;
-    @apply transition;
+    @apply relative size-10 overflow-hidden rounded-full ring-1 ring-white/20 sm:size-11;
+    @apply transition group-hover:ring-white/35;
     transition-duration: var(--duration-interactive);
   }
 
@@ -279,32 +262,76 @@
   }
 
   .rail-scroll {
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     scroll-padding-block: 0.35rem;
     scroll-padding-inline: 0.25rem;
   }
 
-  .rail-scroll:hover,
-  .rail-scroll:focus-within {
-    scrollbar-color: var(--color-scroll-thumb-hover) transparent;
-  }
-
   .rail-scroll::-webkit-scrollbar {
-    height: 0.24rem;
+    display: none;
   }
 
-  .rail-scroll::-webkit-scrollbar-track {
+  .scroll-rail-section {
+    @apply min-w-0;
+  }
+
+  .scroll-rail-gutter {
+    @apply grid w-4 shrink-0 place-items-center self-stretch sm:w-8 lg:w-12;
+  }
+
+  .scroll-rail-viewport {
+    @apply relative min-w-0;
+  }
+
+  .scroll-rail-fade {
+    @apply pointer-events-none absolute inset-y-0 z-20 w-6 opacity-0 transition-opacity ease-out;
+    transition-duration: var(--duration-interactive);
     background: transparent;
   }
 
-  .rail-scroll::-webkit-scrollbar-thumb {
-    border-radius: 999px;
-    background: transparent;
+  .scroll-rail-fade[data-active] {
+    opacity: 1;
   }
 
-  .rail-scroll:hover::-webkit-scrollbar-thumb,
-  .rail-scroll:focus-within::-webkit-scrollbar-thumb {
-    background: var(--color-scroll-thumb);
+  .scroll-rail-fade--left {
+    left: 0;
+    -webkit-mask-image: linear-gradient(to right, #000 0%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 0%, transparent 100%);
+    -webkit-backdrop-filter: brightness(0);
+    backdrop-filter: brightness(0);
+  }
+
+  .scroll-rail-fade--right {
+    right: 0;
+    -webkit-mask-image: linear-gradient(to left, #000 0%, transparent 100%);
+    mask-image: linear-gradient(to left, #000 0%, transparent 100%);
+    -webkit-backdrop-filter: brightness(0);
+    backdrop-filter: brightness(0);
+  }
+
+  .scroll-rail-arrow {
+    @apply grid h-full min-h-[4.5rem] w-full place-items-center rounded-sm border-0 bg-transparent text-white/55 transition-[opacity,color,transform] ease-out;
+    transition-duration: var(--duration-interactive);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .scroll-rail-arrow-icon {
+    @apply h-8 w-8 shrink-0;
+  }
+
+  section:hover .scroll-rail-arrow[data-can-scroll='true'],
+  footer:hover .scroll-rail-arrow[data-can-scroll='true'],
+  section:focus-within .scroll-rail-arrow[data-can-scroll='true'],
+  footer:focus-within .scroll-rail-arrow[data-can-scroll='true'],
+  .scroll-rail-arrow:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .scroll-rail-arrow:hover {
+    @apply text-white;
+    transform: scale(1.08);
   }
 }

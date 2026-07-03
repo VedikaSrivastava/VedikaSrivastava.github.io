@@ -1,6 +1,7 @@
 import type { ContentItem } from '../types/content.ts';
 import { useInView } from '../hooks/useInView.ts';
 import SectionHeader from './SectionHeader.tsx';
+import ScrollRail from './ScrollRail.tsx';
 
 type ExperienceRowProps = {
   items: ContentItem[];
@@ -25,7 +26,7 @@ export default function ExperienceRow({ items, onOpen }: ExperienceRowProps) {
         titleId="experience-title"
         subtitle="From clinical ML at BU/BMC to founding-team engineering at an AI startup—the through-line is taking messy real-world problems and making them work in production."
       />
-      <div className="rail-scroll grid auto-cols-[clamp(17rem,34vw,22rem)] grid-flow-col gap-4 overflow-x-auto overscroll-x-contain ps-3 pe-1 pt-4 pb-9 snap-x snap-mandatory sm:pe-1.5 sm:snap-none">
+      <ScrollRail className="grid auto-cols-[clamp(17rem,34vw,22rem)] grid-flow-col gap-4 overflow-x-auto overscroll-x-contain ps-3 pe-1 pt-4 pb-9 snap-x snap-mandatory sm:pe-1.5 sm:snap-none">
         {items.map((item, index) => (
           <button
             className="group row-card-trigger block"
@@ -51,7 +52,7 @@ export default function ExperienceRow({ items, onOpen }: ExperienceRowProps) {
             </span>
           </button>
         ))}
-      </div>
+      </ScrollRail>
     </section>
   );
 }

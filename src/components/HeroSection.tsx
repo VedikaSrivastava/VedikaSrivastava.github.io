@@ -1,7 +1,7 @@
 import type { ContentItem } from '../types/content.ts';
 
 type HeroSectionProps = {
-  item?: ContentItem;
+  item: ContentItem;
   onOpen: (item: ContentItem) => void;
 };
 
@@ -28,10 +28,6 @@ function InfoIcon() {
 }
 
 export default function HeroSection({ item, onOpen }: HeroSectionProps) {
-  if (!item) {
-    return null;
-  }
-
   return (
     <section
       id="top"
@@ -47,10 +43,7 @@ export default function HeroSection({ item, onOpen }: HeroSectionProps) {
 
       <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_23rem]">
         <div className="max-w-4xl">
-          <p className="mb-4 flex items-center gap-2.5">
-            <span className="text-2xl leading-none font-black tracking-[-0.08em] text-signal-hot">
-              VS
-            </span>
+          <p className="mb-4">
             <span className="text-[0.65rem] font-black tracking-[0.34em] text-white/55 uppercase sm:text-xs">
               An Original Series
             </span>

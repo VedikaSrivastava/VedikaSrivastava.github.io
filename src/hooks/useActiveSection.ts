@@ -79,21 +79,10 @@ export function useActiveSection(sectionIds: string[]) {
     window.addEventListener('scroll', scheduleUpdate, { passive: true });
     window.addEventListener('resize', scheduleUpdate);
 
-    const main = document.querySelector('main');
-    const mutationObserver = main ? new MutationObserver(scheduleUpdate) : null;
-
-    mutationObserver?.observe(main!, { childList: true, subtree: true });
-
-    const retryTimers = [250, 800, 2000].map((delay) =>
-      window.setTimeout(updateActiveSection, delay),
-    );
-
     return () => {
       cancelAnimationFrame(frameId);
       window.removeEventListener('scroll', scheduleUpdate);
       window.removeEventListener('resize', scheduleUpdate);
-      mutationObserver?.disconnect();
-      retryTimers.forEach((timer) => window.clearTimeout(timer));
     };
   }, [sectionIds]);
 

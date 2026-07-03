@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { observedSectionIds, siteNavigation } from '../content/navigation.ts';
 import { useActiveSection } from '../hooks/useActiveSection.ts';
 import { useNavIndicator } from '../hooks/useNavIndicator.ts';
+import ProfileAvatarIcon from './ProfileAvatarIcon.tsx';
 
 function SectionNav({ activeSection }: { activeSection: string | null }) {
   const navRef = useRef<HTMLElement>(null);
@@ -65,17 +66,23 @@ export default function SiteHeader() {
     >
       <div className="flex items-center gap-3 px-4 py-3 sm:gap-5 sm:px-8 lg:gap-8 lg:px-12">
         <a
-          className="group interactive inline-flex shrink-0 items-center gap-3.5 hover:-translate-y-px sm:gap-4"
+          className={`group interactive inline-flex shrink-0 items-center hover:-translate-y-px ${
+            isScrolled ? 'gap-3.5 sm:gap-4' : 'gap-0'
+          }`}
           href="#top"
           aria-label="Vedika Srivastava home"
         >
           <span className="logo-mark">
-            <span className="text-sm font-black tracking-[-0.06em] text-white sm:text-base">
-              VS
-            </span>
-            <span className="pointer-events-none absolute inset-0 rounded-[0.2rem] ring-1 ring-white/25 ring-inset" />
+            <ProfileAvatarIcon />
           </span>
-          <span className="hidden min-w-0 flex-col leading-none sm:flex">
+          <span
+            className={`hidden min-w-0 flex-col overflow-hidden leading-none transition-[max-width,opacity,transform] duration-300 ease-out sm:flex ${
+              isScrolled
+                ? 'max-w-[11rem] translate-x-0 opacity-100 lg:max-w-[12rem]'
+                : 'max-w-0 -translate-x-1 opacity-0'
+            }`}
+            aria-hidden={!isScrolled}
+          >
             <span className="text-[1.35rem] font-black tracking-[0.06em] text-signal-hot uppercase lg:text-[1.55rem]">
               Vedika
             </span>

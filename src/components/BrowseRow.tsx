@@ -2,6 +2,22 @@ import type { CSSProperties } from 'react';
 import type { BrowseRowVariant, ContentItem } from '../types/content.ts';
 import { useInView } from '../hooks/useInView.ts';
 import SectionHeader from './SectionHeader.tsx';
+import ScrollRail from './ScrollRail.tsx';
+
+const variantStyles: Record<BrowseRowVariant, { cols: string; aspect: string }> = {
+  standard: {
+    cols: 'auto-cols-[clamp(15rem,28vw,19rem)]',
+    aspect: 'aspect-[5/6]',
+  },
+  wide: {
+    cols: 'auto-cols-[clamp(17rem,34vw,24rem)]',
+    aspect: 'aspect-[5/6]',
+  },
+  compact: {
+    cols: 'auto-cols-[clamp(14rem,24vw,17rem)]',
+    aspect: 'aspect-[4/5]',
+  },
+};
 
 type BrowseRowProps = {
   sectionId: string;
@@ -11,7 +27,6 @@ type BrowseRowProps = {
   onOpen: (item: ContentItem) => void;
   subtitle?: string;
   variant?: BrowseRowVariant;
-  ranked?: boolean;
 };
 
 export default function BrowseRow({
@@ -22,13 +37,11 @@ export default function BrowseRow({
   items,
   onOpen,
   variant = 'standard',
-  ranked = false,
 }: BrowseRowProps) {
   const { ref, isVisible } = useInView<HTMLElement>();
   const isEducationRow = sectionId === 'education';
-  // Research tiles show publisher logos: contain them on a light backdrop
-  // (several marks are dark and would disappear on the dark card).
   const isLogoTile = sectionId === 'research';
+  const { cols, aspect } = variantStyles[variant];
 
   return (
     <section
@@ -45,27 +58,18 @@ export default function BrowseRow({
         titleId={`${sectionId}-title`}
         subtitle={subtitle}
       />
-      <div
-        className={`rail-scroll grid grid-flow-col gap-3 overflow-x-auto overscroll-x-contain px-1 pt-4 pb-9 snap-x snap-mandatory sm:px-1.5 sm:snap-none ${
-          variant === 'wide' ? 'auto-cols-[clamp(17rem,34vw,24rem)]' : ''
-        } ${variant === 'standard' ? 'auto-cols-[clamp(15rem,28vw,19rem)]' : ''} ${
-          variant === 'compact' ? 'auto-cols-[clamp(14rem,24vw,17rem)]' : ''
-        } ${ranked ? 'auto-cols-[clamp(17rem,32vw,22rem)] ps-2 sm:ps-3' : ''}`}
+      <ScrollRail
+        className={`grid grid-flow-col gap-3 overflow-x-auto overscroll-x-contain px-1 pt-4 pb-9 snap-x snap-mandatory sm:px-1.5 sm:snap-none ${cols}`}
         role="list"
       >
-        {items.map((item, index) => (
+        {items.map((item) => (
           <button
-            className={`group row-card-trigger grid origin-center ${
-              variant === 'wide' ? 'aspect-[5/6]' : ''
-            } ${variant === 'standard' ? 'aspect-[5/6]' : ''} ${
-              variant === 'compact' ? 'aspect-[4/5]' : ''
-            } ${ranked ? 'aspect-[5/6] bg-transparent shadow-none' : ''}`}
+            className={`group row-card-trigger grid origin-center ${aspect}`}
             key={item.id}
             type="button"
             onClick={() => onOpen(item)}
             role="listitem"
           >
-            {ranked && <span className="rank-index">{index + 1}</span>}
             <span className="row-card-surface relative z-10 grid h-full min-w-0 overflow-hidden">
               {item.image ? (
                 <img
@@ -114,7 +118,7 @@ export default function BrowseRow({
             </span>
           </button>
         ))}
-      </div>
+      </ScrollRail>
     </section>
   );
 }

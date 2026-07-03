@@ -11,23 +11,15 @@ export type ContentItem = {
   details: string[];
   link?: string;
   linkLabel?: string;
-  featured?: boolean;
   /** Brand color used to tint the tile backdrop (e.g. school color). */
   accent?: string;
-};
-
-export type ContentMetric = {
-  value: string;
-  label: string;
 };
 
 export type SiteContent = {
   projects: ContentItem[];
   experience: ContentItem[];
   research: ContentItem[];
-  skills: ContentItem[];
   education: ContentItem[];
-  metrics: ContentMetric[];
 };
 
 export type ContactPlatform = 'email' | 'linkedin' | 'github' | 'scholar' | 'medium';

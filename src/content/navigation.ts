@@ -4,7 +4,6 @@ export const siteNavigation: NavigationItem[] = [
   { id: 'experience', label: 'Experience', href: '#experience' },
   { id: 'research', label: 'Research', href: '#research' },
   { id: 'projects', label: 'Projects', href: '#projects' },
-  { id: 'skills', label: 'Skills', href: '#skills' },
   { id: 'education', label: 'Education', href: '#education' },
   { id: 'contact', label: 'Contact', href: '#contact' },
 ];

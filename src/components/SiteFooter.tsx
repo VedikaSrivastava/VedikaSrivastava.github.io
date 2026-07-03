@@ -1,6 +1,7 @@
 import { contactLinks } from '../content/contact-links.ts';
 import type { ContactPlatform } from '../types/content.ts';
 import { useInView } from '../hooks/useInView.ts';
+import ScrollRail from './ScrollRail.tsx';
 
 function ContactIcon({ platform }: { platform: ContactPlatform }) {
   const className = 'h-9 w-9 shrink-0 sm:h-10 sm:w-10';
@@ -108,8 +109,8 @@ export default function SiteFooter() {
         ))}
       </div>
 
-      <div
-        className="rail-scroll overflow-x-auto overscroll-x-contain pb-1 sm:hidden"
+      <ScrollRail
+        className="overflow-x-auto overscroll-x-contain pb-1 sm:hidden"
         aria-label="Contact links"
       >
         <div className="flex w-max gap-3">
@@ -123,7 +124,7 @@ export default function SiteFooter() {
             />
           ))}
         </div>
-      </div>
+      </ScrollRail>
     </footer>
   );
 }
