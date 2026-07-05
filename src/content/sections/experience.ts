@@ -7,6 +7,9 @@ export const experience: ContentItem[] = [
     subtitle: 'Extuitive / Flagship Pioneering',
     location: 'Boston, MA',
     period: 'Jun 2025 - Jun 2026',
+    image: '/images/experience/extuitive-ai-saas.png',
+    imageAlt:
+      'Abstract production AI SaaS architecture with workflow cards, scoring nodes, and integration pipelines.',
     rating: 'Founding Team',
     tags: [
       'LangGraph',
@@ -50,6 +53,9 @@ export const experience: ContentItem[] = [
     subtitle: 'Boston University / Boston Medical Center',
     location: 'Boston, MA',
     period: 'Sep 2024 - Jun 2025',
+    image: '/images/experience/bu-bmc-healthcare-ai.png',
+    imageAlt:
+      'Abstract healthcare AI visualization with EEG-like signal waves, clinical data nodes, and neural patterns.',
     rating: 'Healthcare AI',
     tags: [
       'PyTorch',
@@ -89,6 +95,9 @@ export const experience: ContentItem[] = [
     subtitle: 'BeSpoke Care Inc., My Phoenyx',
     location: 'Boston, MA',
     period: 'Jun 2024 - Feb 2025',
+    image: '/images/experience/my-phoenyx-voice-ai.png',
+    imageAlt:
+      'Abstract voice AI companion system with sound waves, agent signals, and connected smart-device patterns.',
     rating: 'Product AI',
     tags: [
       'My Phoenyx',
@@ -129,6 +138,9 @@ export const experience: ContentItem[] = [
     subtitle: 'Time Machine Learning Inc.',
     location: 'Boston, MA',
     period: 'Mar 2024 - Jun 2024',
+    image: '/images/experience/time-machine-rag.png',
+    imageAlt:
+      'Abstract retrieval augmented generation system with document blocks, vector connections, and a central reasoning node.',
     tags: ['RAG', 'Vector Search', 'Mistral', 'Azure MLOps', 'Python', 'SaaS'],
     summary:
       'Built RAG and vector-search infrastructure for a SaaS onboarding product using Mistral, Azure MLOps, and production-oriented retrieval workflows.',
@@ -154,6 +166,9 @@ export const experience: ContentItem[] = [
     subtitle: 'Institute for Global Sustainability / NREL',
     location: 'Boston, MA',
     period: 'May 2023 - Jul 2023',
+    image: '/images/experience/nrel-energy-data.png',
+    imageAlt:
+      'Abstract energy data analytics scene with grid structures, policy-chart lines, and sustainability data signals.',
     tags: ['Python', 'scikit-learn', 'spaCy', 'Plotly', 'Data Science', 'Policy Analytics'],
     summary:
       'Analyzed energy-policy datasets and built dashboards that helped stakeholders explore RECS, Justice40, and LEAD data.',
@@ -179,6 +194,9 @@ export const experience: ContentItem[] = [
     subtitle: 'Boston University',
     location: 'Boston, MA',
     period: 'Jan 2023 - Dec 2023',
+    image: '/images/experience/bu-teaching-ai.png',
+    imageAlt:
+      'Abstract AI teaching environment with learning nodes, code-like signal lines, and collaborative model diagrams.',
     tags: ['Teaching', 'Mentorship', 'AI', 'ML', 'Python', 'TensorFlow', 'NLP'],
     summary:
       'Supported 200+ students across AI/ML labs, debugging, grading, and project mentorship.',
@@ -204,6 +222,9 @@ export const experience: ContentItem[] = [
     subtitle: 'IBM',
     location: 'Pune, India',
     period: 'Jan 2022 - Jul 2022',
+    image: '/images/experience/ibm-backend-systems.png',
+    imageAlt:
+      'Abstract backend systems architecture with service blocks, runtime nodes, and cloud infrastructure connections.',
     tags: ['Java', 'Quarkus', 'OpenJDK', 'Microservices', 'Backend Engineering'],
     summary:
       'Optimized an IBM Security Verify Java microservice through Quarkus migration, reducing resource usage and improving efficiency.',
@@ -229,6 +250,9 @@ export const experience: ContentItem[] = [
     subtitle: 'Tech Mahindra',
     location: 'Pune, India',
     period: 'Oct 2020 - Jan 2021',
+    image: '/images/experience/techmahindra-nlp.png',
+    imageAlt:
+      'Abstract natural language processing network with multilingual signal clusters, voice-wave arcs, and data pipelines.',
     tags: ['NLP', 'Python', 'BeautifulSoup', 'NLTK', 'Multilingual AI'],
     summary:
       'Built a Sanskrit voice-bot pipeline using scraping, NLP preprocessing, backend development, and multilingual algorithm evaluation.',
