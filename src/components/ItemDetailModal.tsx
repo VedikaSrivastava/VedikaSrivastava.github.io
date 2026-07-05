@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { ContentItem } from '../types/content.ts';
 
 type ItemDetailModalProps = {
@@ -7,6 +7,12 @@ type ItemDetailModalProps = {
 };
 
 export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps) {
+  const [hasImageError, setHasImageError] = useState(false);
+
+  useEffect(() => {
+    setHasImageError(false);
+  }, [item?.id]);
+
   useEffect(() => {
     if (!item) {
       return;
@@ -31,6 +37,7 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
   }
 
   const isAbout = item.id === 'hero-profile';
+  const canShowImage = item.image && !hasImageError;
 
   return (
     <div
@@ -48,9 +55,14 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
       <article className="relative max-h-[92dvh] w-full max-w-4xl animate-modal-in overflow-auto rounded-t-md bg-panel shadow-stream sm:max-h-[88svh] sm:rounded-md">
         {/* Billboard header: cover images fade into the panel with the title on
             top; logo images sit as a contained chip on a dark gradient. */}
-        {item.image && item.imageStyle !== 'logo' ? (
+        {canShowImage && item.imageStyle !== 'logo' ? (
           <div className="relative">
-            <img className="max-h-64 w-full object-cover sm:max-h-96" src={item.image} alt="" />
+            <img
+              className="max-h-64 w-full object-cover sm:max-h-96"
+              src={item.image}
+              alt={item.imageAlt ?? ''}
+              onError={() => setHasImageError(true)}
+            />
             <div
               aria-hidden="true"
               className="absolute inset-0 bg-linear-to-t from-panel from-4% via-panel/45 via-38% to-transparent"
@@ -69,9 +81,14 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
           </div>
         ) : (
           <div className="bg-[radial-gradient(ellipse_42rem_18rem_at_16%_-30%,rgba(229,9,20,0.28),transparent_70%),linear-gradient(180deg,#191919_0%,var(--color-panel)_100%)] px-5 pt-14 pb-1 sm:px-9 sm:pt-16">
-            {item.image && (
+            {canShowImage && (
               <span className="mb-4 inline-flex items-center rounded-sm bg-[#f5f5f1] px-4 py-2.5">
-                <img className="h-10 w-36 object-contain sm:h-12 sm:w-44" src={item.image} alt="" />
+                <img
+                  className="h-10 w-36 object-contain sm:h-12 sm:w-44"
+                  src={item.image}
+                  alt={item.imageAlt ?? ''}
+                  onError={() => setHasImageError(true)}
+                />
               </span>
             )}
             <p className="mb-2 text-[0.65rem] font-black tracking-[0.3em] text-signal-hot uppercase">

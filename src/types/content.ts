@@ -10,6 +10,7 @@ export type ContentItem = {
   location?: string;
   period?: string;
   image?: string;
+  imageAlt?: string;
   /** How the modal billboard renders the image: full-bleed cover (default) or a contained logo chip. */
   imageStyle?: 'cover' | 'logo';
   rating?: string;
