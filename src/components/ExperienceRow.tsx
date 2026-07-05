@@ -24,7 +24,7 @@ export default function ExperienceRow({ items, onOpen }: ExperienceRowProps) {
         eyebrow="Experience"
         title="Experience"
         titleId="experience-title"
-        subtitle="From clinical ML at BU/BMC to founding-team engineering at an AI startup—the through-line is taking messy real-world problems and making them work in production."
+        subtitle="From healthcare AI research at Boston University / Boston Medical Center to founding-team applied AI engineering at Extuitive / Flagship Pioneering—the through-line is taking messy real-world problems and making them work in production."
       />
       <ScrollRail className="grid auto-cols-[clamp(17rem,34vw,22rem)] grid-flow-col gap-4 overflow-x-auto overscroll-x-contain ps-3 pe-1 pt-4 pb-9 snap-x snap-mandatory sm:pe-1.5 sm:snap-none">
         {items.map((item, index) => (

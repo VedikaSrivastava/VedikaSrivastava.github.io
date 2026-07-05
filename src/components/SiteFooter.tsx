@@ -93,9 +93,15 @@ export default function SiteFooter() {
         <p className="mb-2 text-[0.68rem] font-black tracking-[0.18em] text-signal-hot uppercase">
           Contact
         </p>
-        <h2 className="text-2xl leading-none font-black tracking-[-0.04em] sm:text-3xl">
-          Let&apos;s connect
+        <h2
+          className="text-2xl leading-none font-black tracking-[-0.04em] sm:text-3xl"
+          id="contact-title"
+        >
+          Contact
         </h2>
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70 sm:text-base">
+          Let&apos;s connect — reach out via email, LinkedIn, GitHub, Google Scholar, or Medium.
+        </p>
       </div>
 
       <div className="hidden grid-cols-5 gap-3 sm:grid sm:gap-4 lg:gap-5">

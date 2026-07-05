@@ -7,7 +7,7 @@ export const experience: ContentItem[] = [
     subtitle: 'Extuitive / Flagship Pioneering',
     location: 'Boston, MA',
     period: 'Jun 2025 - Jun 2026',
-    rating: 'Primary Role',
+    rating: 'Founding Team',
     tags: [
       'LangGraph',
       'TypeScript',
@@ -27,13 +27,21 @@ export const experience: ContentItem[] = [
       'PostHog',
     ],
     summary:
-      'Founding-team MLE at an AI creative SaaS startup—LangGraph agents, ad pipelines, model scoring APIs, and the platform glue (Stripe, Meta, Shopify) that kept it all running.',
-    details: [
-      'Core product work on LangGraph: checkpointing, multi-turn flows, competitor analysis, product microsegmentation, and live market/social trend feeds for ad creation.',
-      'Owned the ad-generation-to-publishing pipeline after a product pivot—AI image gen, variant editor with history, direct publish to Meta campaigns and ad sets.',
-      "Productionized the research team's ad-scoring model into real-time API infrastructure (Node.js, AWS Lambda, typed contracts).",
-      'Shipped 10+ workflows across 4 surfaces; owned 5+ integrations (Shopify, Meta, HubSpot, Stripe, Anrok).',
-      'Cut recurring production incidents ~99% with validation, Sentry/PostHog, unit tests, and actually fixing root causes instead of patching symptoms.',
+      'Founding-team machine learning engineer on a production multi-tenant SaaS platform, building LangGraph agentic workflows, ad pipelines, model scoring APIs, integrations, and reliability systems.',
+    details: [],
+    sections: [
+      {
+        label: 'Context',
+        body: 'Joined as part of the founding engineering team at an AI creative SaaS startup within Flagship Pioneering. Over one year the product went through three major pivots\u2014each one meant rethinking workflows, carrying forward the infrastructure worth keeping, and shipping the new direction quickly without breaking what users already relied on.',
+      },
+      {
+        label: 'What I built',
+        body: 'Owned entire workflows end-to-end with minimal guidance: LangGraph-based agent systems with checkpointing and multi-turn state, competitor analysis and product microsegmentation, live market and social trend feeds for ad creation, and the full ad-generation-to-publishing pipeline\u2014AI image generation, a variant editor with history, and direct publishing to Meta campaigns and ad sets. Also productionized the research team\u2019s ad-scoring model into a real-time API on Node.js and AWS Lambda with typed contracts.',
+      },
+      {
+        label: 'Impact',
+        body: 'Shipped 10+ workflows across 4 product surfaces and owned 5+ platform integrations (Shopify, Meta, HubSpot, Stripe, Anrok). Helped the team move smoothly through each pivot by keeping systems modular enough to repurpose rather than rebuild. Reliability work with validation, Sentry, PostHog, and unit tests cut recurring production incidents by roughly 99%.',
+      },
     ],
   },
   {
@@ -58,13 +66,21 @@ export const experience: ContentItem[] = [
       'HyperOpt',
     ],
     summary:
-      'Three concurrent clinical AI projects at BU/BMC—EEG edema detection, meal-informed glucose modeling, and knowledge-graph RAG for medical literature—all under HIPAA-aware workflows.',
-    details: [
-      'EEG cerebral edema: Transformer/LSTM over 18 bipolar channels, 30-fold experiments, ~0.80 AUC at shorter horizons; also reported 92% test accuracy on held-out clinical data.',
-      'Glucose modeling: built CGM prediction integrating meal intake for real-time glycemic trend forecasts—published in Circulation 2026.',
-      'Knowledge graphs: PubMed-derived entity/subgraph retrieval to ground LLM clinical QA; explored GAN-based graph augmentation for data diversity.',
-      'Mentored 7 grad researchers on clinical ML, data processing, and evaluation—learned that teaching forces you to know what you actually understand.',
-      'GPU training on BU SCC with PyTorch/CUDA, mixed precision, Optuna/HyperOpt.',
+      'Clinical AI research across EEG cerebral edema prediction, meal-informed glucose modeling, and knowledge-graph retrieval for medical literature.',
+    details: [],
+    sections: [
+      {
+        label: 'Context',
+        body: 'Three concurrent clinical AI projects run jointly between Boston University and Boston Medical Center, all under HIPAA-aware data workflows with real patient signals.',
+      },
+      {
+        label: 'What I built',
+        body: 'Transformer and LSTM pipelines over 18 bipolar EEG channels for cerebral edema prediction (30-fold experiments, ~0.80 AUC at shorter horizons); a CGM glucose forecasting model that incorporates meal intake, later published in Circulation; and PubMed-derived knowledge-graph retrieval to ground LLM clinical question-answering, including experiments with GAN-based graph augmentation.',
+      },
+      {
+        label: 'Impact',
+        body: 'The glucose work was published in Circulation (2026) and the EEG work is under review. Mentored 7 graduate researchers on clinical ML, data processing, and evaluation methodology along the way.',
+      },
     ],
   },
   {
@@ -90,12 +106,21 @@ export const experience: ContentItem[] = [
       'ESP32',
     ],
     summary:
-      'Lead AI engineer for My Phoenyx—a bilingual learning companion for children. Multi-agent LLMs, voice AI, and deployment to 100+ smart devices.',
-    details: [
-      'Multi-agent architecture with AutoGen, Azure OpenAI, FastAPI, WebSockets; led 3-person team, +25% AI workflow throughput.',
-      'Interactive storytelling with GPT-4o Mini, Gemini, AWS Polly, Dialogflow CX, and Ludwig—multilingual, age-adaptive content.',
-      'Edge deployment: multithreaded AWS (EC2, Lambda) backend serving Raspberry Pi/ESP32 devices.',
-      'Built CI/CD and code review practices for LLM apps—agents need the same engineering discipline as anything else in production.',
+      'Lead AI engineer for My Phoenyx, building multi-agent LLM, voice AI, and smart-device workflows for a bilingual learning companion.',
+    details: [],
+    sections: [
+      {
+        label: 'Context',
+        body: 'My Phoenyx is a bilingual learning companion for children that runs on physical smart devices, which means voice, multi-agent AI, and edge hardware all have to work together in one product.',
+      },
+      {
+        label: 'What I built',
+        body: 'A multi-agent architecture using AutoGen, Azure OpenAI, FastAPI, and WebSockets; interactive multilingual, age-adaptive storytelling with GPT-4o Mini, Gemini, AWS Polly, Dialogflow CX, and Ludwig; and a multithreaded AWS backend (EC2, Lambda) serving Raspberry Pi and ESP32 devices that supported a 100-device target environment.',
+      },
+      {
+        label: 'Impact',
+        body: 'Led a 3-person team and improved AI workflow throughput by about 25%. Also introduced CI/CD and code review practices for the LLM stack\u2014agents need the same engineering discipline as any other production system.',
+      },
     ],
   },
   {
@@ -106,11 +131,21 @@ export const experience: ContentItem[] = [
     period: 'Mar 2024 - Jun 2024',
     tags: ['RAG', 'Vector Search', 'Mistral', 'Azure MLOps', 'Python', 'SaaS'],
     summary:
-      'Built the RAG and vector search backbone for a SaaS onboarding product—Mistral embeddings, Azure MLOps, and a 35% scalability bump.',
-    details: [
-      'Designed vector DB architecture with all-mpnet-base-v2 embeddings and retrieval-augmented onboarding flows.',
-      'Stack: Mistral, Azure MLOps, FAISS-style vector search patterns.',
-      'Short stint, but where I first connected RAG architecture to actual product onboarding—not just chatbot demos.',
+      'Built RAG and vector-search infrastructure for a SaaS onboarding product using Mistral, Azure MLOps, and production-oriented retrieval workflows.',
+    details: [],
+    sections: [
+      {
+        label: 'Context',
+        body: 'A short, focused engagement building the retrieval layer for a SaaS onboarding product\u2014where RAG had to serve a real user flow rather than a chatbot demo.',
+      },
+      {
+        label: 'What I built',
+        body: 'Vector database architecture using all-mpnet-base-v2 embeddings, retrieval-augmented onboarding flows, and Azure MLOps pipelines around Mistral models.',
+      },
+      {
+        label: 'Impact',
+        body: 'The redesigned retrieval architecture improved scalability by roughly 35%, and the project shaped how I think about connecting RAG to actual product workflows.',
+      },
     ],
   },
   {
@@ -121,12 +156,21 @@ export const experience: ContentItem[] = [
     period: 'May 2023 - Jul 2023',
     tags: ['Python', 'scikit-learn', 'spaCy', 'Plotly', 'Data Science', 'Policy Analytics'],
     summary:
-      'Energy policy data fellow with NREL advisors—RECS, Justice40, and LEAD datasets turned into 20+ Plotly dashboards for stakeholders.',
-    details: [
-      'Built an energy planning tool integrating RECS, Justice40, and LEAD data for sustainable policy analysis.',
-      '20+ interactive Plotly Dash visualizations—designed for policymakers, not data scientists.',
-      'Presented findings to 50+ stakeholders on energy inequality and justice implications.',
-      'Python, scikit-learn, spaCy, regression/classification throughout.',
+      'Analyzed energy-policy datasets and built dashboards that helped stakeholders explore RECS, Justice40, and LEAD data.',
+    details: [],
+    sections: [
+      {
+        label: 'Context',
+        body: 'A fellowship with NREL advisors focused on energy inequality and justice\u2014turning federal datasets into something policymakers could actually explore.',
+      },
+      {
+        label: 'What I built',
+        body: 'An energy planning tool integrating RECS, Justice40, and LEAD data, plus 20+ interactive Plotly Dash visualizations designed for policymakers rather than data scientists. Python, scikit-learn, and spaCy throughout.',
+      },
+      {
+        label: 'Impact',
+        body: 'Presented findings on energy inequality and justice implications to 50+ stakeholders.',
+      },
     ],
   },
   {
@@ -137,11 +181,21 @@ export const experience: ContentItem[] = [
     period: 'Jan 2023 - Dec 2023',
     tags: ['Teaching', 'Mentorship', 'AI', 'ML', 'Python', 'TensorFlow', 'NLP'],
     summary:
-      'TA for Computational Tools for Data Science—30+ labs, 200+ students, and the satisfaction of watching someone finally get gradient descent.',
-    details: [
-      'Led weekly labs and office hours; taught Python, sklearn, TensorFlow, and PyTorch hands-on.',
-      'Mentored 10+ BU Spark! NLP/ML projects; reviewed work on K-means, KNN, SVM, GMM, TF-IDF, Word2Vec, GANs.',
-      '95% positive student evaluations—turns out showing up prepared and actually debugging their code matters.',
+      'Supported 200+ students across AI/ML labs, debugging, grading, and project mentorship.',
+    details: [],
+    sections: [
+      {
+        label: 'Context',
+        body: 'TA for Computational Tools for Data Science\u2014weekly labs, office hours, and a steady stream of code that needed debugging.',
+      },
+      {
+        label: 'What I built',
+        body: 'Ran 30+ hands-on labs covering Python, scikit-learn, TensorFlow, and PyTorch, and mentored 10+ BU Spark! NLP/ML projects spanning K-means, KNN, SVM, GMM, TF-IDF, Word2Vec, and GANs.',
+      },
+      {
+        label: 'Impact',
+        body: 'Received 95% positive student evaluations. Teaching also forces you to know what you actually understand\u2014some of my clearest mental models came from explaining them badly the first time.',
+      },
     ],
   },
   {
@@ -152,11 +206,21 @@ export const experience: ContentItem[] = [
     period: 'Jan 2022 - Jul 2022',
     tags: ['Java', 'Quarkus', 'OpenJDK', 'Microservices', 'Backend Engineering'],
     summary:
-      'IBM Security Verify microservice optimization—Quarkus migration that cut resource usage 50% and boosted efficiency 13%.',
-    details: [
-      'Migrated and optimized a Java microservice from legacy stack to Quarkus/OpenJDK 11.',
-      'Coordinated with a cross-functional team in Singapore on IBM Security Verify upgrades.',
-      'First taste of enterprise engineering: performance gains that actually showed up on customer invoices.',
+      'Optimized an IBM Security Verify Java microservice through Quarkus migration, reducing resource usage and improving efficiency.',
+    details: [],
+    sections: [
+      {
+        label: 'Context',
+        body: 'An enterprise backend internship on IBM Security Verify, working with a cross-functional team based in Singapore.',
+      },
+      {
+        label: 'What I built',
+        body: 'Migrated a legacy Java microservice to Quarkus on OpenJDK 11, restructuring it for faster startup and a smaller runtime footprint.',
+      },
+      {
+        label: 'Impact',
+        body: 'Cut resource usage by about 50% and improved efficiency by 13%\u2014performance gains that showed up in real infrastructure costs, which was a formative first look at engineering at enterprise scale.',
+      },
     ],
   },
   {
@@ -167,11 +231,21 @@ export const experience: ContentItem[] = [
     period: 'Oct 2020 - Jan 2021',
     tags: ['NLP', 'Python', 'BeautifulSoup', 'NLTK', 'Multilingual AI'],
     summary:
-      'Built a Sanskrit voice bot from scratch—web scraping 20+ sources, evaluating 11+ NLP algorithms, and caring about linguistic preservation.',
-    details: [
-      'Novel voice bot in Sanskrit: data from 20+ web sources, MySQL backend, BeautifulSoup/NLTK pipelines.',
-      'Benchmarked 11+ algorithms for accuracy and scalability across multilingual workflows.',
-      'Published in Wiley 2023—the project that convinced me NLP could preserve languages, not just automate them away.',
+      'Built a Sanskrit voice-bot pipeline using scraping, NLP preprocessing, backend development, and multilingual algorithm evaluation.',
+    details: [],
+    sections: [
+      {
+        label: 'Context',
+        body: 'A research internship exploring whether modern NLP could make Sanskrit a usable interface language\u2014part engineering problem, part language preservation.',
+      },
+      {
+        label: 'What I built',
+        body: 'A voice-bot pipeline built from scratch: data scraped from 20+ web sources with BeautifulSoup, NLTK preprocessing, a MySQL backend, and benchmarking of 11+ NLP algorithms for accuracy and scalability across multilingual workflows.',
+      },
+      {
+        label: 'Impact',
+        body: 'The work was later published as a Wiley book chapter (2023), and it\u2019s the project that convinced me NLP could preserve languages rather than just automate them away.',
+      },
     ],
   },
 ];

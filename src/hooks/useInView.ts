@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export function useInView<TElement extends Element>() {
   const ref = useRef<TElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(() => typeof window === 'undefined');
 
   useEffect(() => {
     const element = ref.current;

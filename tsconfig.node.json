@@ -10,7 +10,8 @@
     "strict": true,
     "moduleResolution": "bundler",
     "isolatedModules": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["node"]
   },
   "include": ["vite.config.ts"]
 }

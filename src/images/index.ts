@@ -14,6 +14,7 @@ import issGeolocate from './iss_geolocate.jpg';
 import lightSensor from './light_sensor.jpg';
 import midspark from './midspark.jpg';
 import mitwpuLogo from './mit-world-peace-university-logo.png';
+import neunetAiPlatform from './neunet-ai-platform.png';
 import rodent from './rodent.jpg';
 import styleTransfer from './style_transfer.jpg';
 import textToLive from './text_to_live.jpg';
@@ -37,6 +38,7 @@ export const contentImages = {
   lightSensor,
   midspark,
   mitwpuLogo,
+  neunetAiPlatform,
   rodent,
   styleTransfer,
   textToLive,

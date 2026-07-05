@@ -1,3 +1,8 @@
+export type DetailSection = {
+  label: string;
+  body: string;
+};
+
 export type ContentItem = {
   id: string;
   title: string;
@@ -5,10 +10,14 @@ export type ContentItem = {
   location?: string;
   period?: string;
   image?: string;
+  /** How the modal billboard renders the image: full-bleed cover (default) or a contained logo chip. */
+  imageStyle?: 'cover' | 'logo';
   rating?: string;
   tags: string[];
   summary: string;
   details: string[];
+  /** Labeled modal sections (Context / What I built / Impact, etc.). Preferred over `details` when present. */
+  sections?: DetailSection[];
   link?: string;
   linkLabel?: string;
   /** Brand color used to tint the tile backdrop (e.g. school color). */
@@ -16,6 +25,7 @@ export type ContentItem = {
 };
 
 export type SiteContent = {
+  heroProfile: ContentItem;
   projects: ContentItem[];
   experience: ContentItem[];
   research: ContentItem[];
