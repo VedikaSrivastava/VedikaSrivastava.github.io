@@ -1,0 +1,337 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --color-void: #050505;
+  --color-panel: #111111;
+  --color-card: #141414;
+  --color-card-hover: #1f1f1f;
+  --color-line: rgba(255, 255, 255, 0.12);
+  --color-copy: #f7f7f7;
+  --color-muted: #b8b8b8;
+  --color-dim: #737373;
+  --color-signal: #e50914;
+  --color-signal-hot: #ff1f2d;
+
+  --color-brand-email: #fbbc04;
+  --color-brand-linkedin: #0a66c2;
+  --color-brand-github: #f0f6fc;
+  --color-brand-scholar: #4285f4;
+  --color-brand-medium: #00ab6c;
+
+  --color-rank-stroke: rgb(255 255 255 / 0.48);
+
+  --shadow-stream: 0 24px 80px rgba(0, 0, 0, 0.55);
+  --shadow-stream-lg: 0 28px 90px rgba(0, 0, 0, 0.72);
+  --shadow-signal-sm: 0 0 18px color-mix(in srgb, var(--color-signal) 45%, transparent);
+  --shadow-signal-md: 0 0 32px color-mix(in srgb, var(--color-signal) 42%, transparent);
+
+  --ease-stream: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-interactive: 200ms;
+  --duration-modal: 220ms;
+  --duration-reveal: 500ms;
+  --duration-nav: 300ms;
+
+  --animate-modal-in: modal-in var(--duration-modal) var(--ease-stream);
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(4.5rem + env(safe-area-inset-top, 0px));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    overscroll-behavior-y: none;
+  }
+
+  :where(a, button) {
+    touch-action: manipulation;
+  }
+
+  :where(section[id], footer[id]) {
+    scroll-margin-top: calc(4.5rem + env(safe-area-inset-top, 0px));
+  }
+}
+
+@layer utilities {
+  .focus-ring {
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white;
+  }
+
+  .focus-ring-nav {
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white;
+  }
+
+  .section-reveal {
+    /* Only opacity + transform: they run on the compositor, unlike
+       transition-all which can pick up paint/layout-heavy properties. */
+    @apply transition-[opacity,transform] ease-out;
+    transition-duration: var(--duration-reveal);
+  }
+
+  .interactive {
+    @apply transition;
+    transition-duration: var(--duration-interactive);
+  }
+
+  .row-card-trigger {
+    /* No transition here: with `transition: all`, the hover z-index change
+       animates in discrete steps, so the raised card lags behind its
+       neighbors for ~100ms. The surface inside handles the animated bits. */
+    @apply relative snap-start text-left hover:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white;
+  }
+
+  .row-card-surface {
+    @apply rounded-sm border border-line bg-card shadow-stream group-hover:scale-[1.02] group-hover:border-white/40 group-hover:bg-card-hover group-hover:shadow-stream-lg group-focus-visible:scale-[1.02] group-focus-visible:border-white;
+    /* Don't transition box-shadow: animating an 80px-blur shadow repaints
+       the card every frame and makes hover feel sticky. It swaps instantly
+       instead, which reads fine at this scale. */
+    @apply transition-[transform,background-color,border-color];
+    transition-duration: var(--duration-interactive);
+  }
+
+  .contact-tile-surface {
+    @apply relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-md border border-white/10 bg-white/[0.03] shadow-stream group-hover:scale-[1.02] group-hover:border-white/40 group-focus-visible:scale-[1.02];
+    @apply transition-[transform,border-color];
+    transition-duration: var(--duration-interactive);
+  }
+
+  .contact-tile-surface[data-platform='email'] {
+    background:
+      radial-gradient(
+        circle at 50% 28%,
+        color-mix(in srgb, var(--color-brand-email) 28%, transparent),
+        transparent 68%
+      ),
+      rgb(255 255 255 / 0.03);
+  }
+
+  .contact-tile-surface[data-platform='linkedin'] {
+    background:
+      radial-gradient(
+        circle at 50% 28%,
+        color-mix(in srgb, var(--color-brand-linkedin) 32%, transparent),
+        transparent 68%
+      ),
+      rgb(255 255 255 / 0.03);
+  }
+
+  .contact-tile-surface[data-platform='github'] {
+    background:
+      radial-gradient(
+        circle at 50% 28%,
+        color-mix(in srgb, var(--color-brand-github) 12%, transparent),
+        transparent 68%
+      ),
+      rgb(255 255 255 / 0.03);
+  }
+
+  .contact-tile-surface[data-platform='scholar'] {
+    background:
+      radial-gradient(
+        circle at 50% 28%,
+        color-mix(in srgb, var(--color-brand-scholar) 30%, transparent),
+        transparent 68%
+      ),
+      rgb(255 255 255 / 0.03);
+  }
+
+  .contact-tile-surface[data-platform='medium'] {
+    background:
+      radial-gradient(
+        circle at 50% 28%,
+        color-mix(in srgb, var(--color-brand-medium) 28%, transparent),
+        transparent 68%
+      ),
+      rgb(255 255 255 / 0.03);
+  }
+
+  .contact-tile-accent {
+    @apply group-hover:scale-110;
+    @apply transition;
+    transition-duration: var(--duration-interactive);
+  }
+
+  .contact-tile-accent[data-platform='email'] {
+    color: var(--color-brand-email);
+  }
+
+  .contact-tile-accent[data-platform='linkedin'] {
+    color: var(--color-brand-linkedin);
+  }
+
+  .contact-tile-accent[data-platform='github'] {
+    color: var(--color-brand-github);
+  }
+
+  .contact-tile-accent[data-platform='scholar'] {
+    color: var(--color-brand-scholar);
+  }
+
+  .contact-tile-accent[data-platform='medium'] {
+    color: var(--color-brand-medium);
+  }
+
+  .contact-tile-label {
+    @apply truncate text-center text-xs font-semibold text-white/50 group-hover:text-white group-focus-visible:text-white sm:text-sm;
+    @apply transition;
+    transition-duration: var(--duration-interactive);
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-sm bg-white px-6 py-3 text-sm font-black text-void hover:bg-white/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto;
+    @apply transition-[background-color];
+    transition-duration: var(--duration-interactive);
+  }
+
+  .btn-secondary {
+    @apply inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-sm bg-white/22 px-6 py-3 text-sm font-black text-white hover:bg-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto;
+    @apply transition-[background-color];
+    transition-duration: var(--duration-interactive);
+  }
+
+  .rank-index {
+    @apply pointer-events-none absolute bottom-2 left-[-0.55rem] z-20 text-7xl leading-none font-black tracking-[-0.12em] text-black opacity-80 sm:left-[-0.7rem] sm:text-8xl;
+    -webkit-text-stroke: 1.5px var(--color-rank-stroke);
+  }
+
+  .nav-indicator {
+    @apply pointer-events-none absolute top-0 bottom-0 rounded-full bg-signal opacity-0 shadow-signal-sm transition-[left,width,opacity] ease-out;
+    transition-duration: var(--duration-nav);
+  }
+
+  .logo-mark {
+    @apply relative size-10 overflow-hidden rounded-full ring-1 ring-white/20 sm:size-11;
+    @apply transition group-hover:ring-white/35;
+    transition-duration: var(--duration-interactive);
+  }
+
+  .logo-tile-art {
+    background:
+      radial-gradient(
+        ellipse 64% 46% at 50% 33%,
+        color-mix(in srgb, var(--tile-accent, var(--color-signal)) 34%, transparent),
+        transparent 72%
+      ),
+      linear-gradient(160deg, #202020 0%, #101010 55%, #070707 100%);
+  }
+
+  .footer-glow {
+    background:
+      radial-gradient(
+        circle at 12% 88%,
+        color-mix(in srgb, var(--color-signal) 14%, transparent),
+        transparent 42%
+      ),
+      radial-gradient(
+        circle at 88% 20%,
+        color-mix(in srgb, var(--color-brand-scholar) 6%, transparent),
+        transparent 35%
+      );
+  }
+
+  .header-nav-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .header-nav-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rail-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-padding-block: 0.35rem;
+    scroll-padding-inline: 0.25rem;
+  }
+
+  .rail-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-rail-section {
+    @apply min-w-0;
+  }
+
+  .scroll-rail-gutter {
+    @apply grid w-4 shrink-0 place-items-center self-stretch sm:w-8 lg:w-12;
+  }
+
+  .scroll-rail-viewport {
+    @apply relative min-w-0;
+  }
+
+  .scroll-rail-fade {
+    @apply pointer-events-none absolute inset-y-0 z-20 w-6 opacity-0 transition-opacity ease-out;
+    transition-duration: var(--duration-interactive);
+    background: transparent;
+  }
+
+  .scroll-rail-fade[data-active] {
+    opacity: 1;
+  }
+
+  .scroll-rail-fade--left {
+    left: 0;
+    -webkit-mask-image: linear-gradient(to right, #000 0%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 0%, transparent 100%);
+    -webkit-backdrop-filter: brightness(0);
+    backdrop-filter: brightness(0);
+  }
+
+  .scroll-rail-fade--right {
+    right: 0;
+    -webkit-mask-image: linear-gradient(to left, #000 0%, transparent 100%);
+    mask-image: linear-gradient(to left, #000 0%, transparent 100%);
+    -webkit-backdrop-filter: brightness(0);
+    backdrop-filter: brightness(0);
+  }
+
+  .scroll-rail-arrow {
+    @apply grid h-full min-h-[4.5rem] w-full place-items-center rounded-sm border-0 bg-transparent text-white/55 transition-[opacity,color,transform] ease-out;
+    transition-duration: var(--duration-interactive);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .scroll-rail-arrow-icon {
+    @apply h-8 w-8 shrink-0;
+  }
+
+  section:hover .scroll-rail-arrow[data-can-scroll='true'],
+  footer:hover .scroll-rail-arrow[data-can-scroll='true'],
+  section:focus-within .scroll-rail-arrow[data-can-scroll='true'],
+  footer:focus-within .scroll-rail-arrow[data-can-scroll='true'],
+  .scroll-rail-arrow:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .scroll-rail-arrow:hover {
+    @apply text-white;
+    transform: scale(1.08);
+  }
+}
