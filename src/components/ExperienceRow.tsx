@@ -89,7 +89,9 @@ export default function ExperienceRow({ items, onOpen }: ExperienceRowProps) {
                 </span>
                 <span className="mt-1 min-h-[3.7rem] text-xs leading-4 font-semibold text-white/78">
                   <span className="line-clamp-2 block">{item.subtitle}</span>
-                  {item.location && <span className="mt-1 block line-clamp-1">{item.location}</span>}
+                  {item.location && (
+                    <span className="mt-1 block line-clamp-1">{item.location}</span>
+                  )}
                 </span>
                 <span className="mt-3 text-xs leading-5 text-white/72">
                   <span className="line-clamp-4">{item.summary}</span>
