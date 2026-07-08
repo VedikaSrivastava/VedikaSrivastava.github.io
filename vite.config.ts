@@ -12,9 +12,7 @@ export default defineConfig(async ({ command }) => {
   // Prerender is opt-in only: it hangs after completion in CI and locally.
   // Dev never loads the plugin. Prod/CI builds skip it unless explicitly enabled.
   const enablePrerender =
-    command === 'build' &&
-    process.env.CI !== 'true' &&
-    process.env.VITE_PRERENDER === 'true';
+    command === 'build' && process.env.CI !== 'true' && process.env.VITE_PRERENDER === 'true';
 
   if (enablePrerender) {
     const { vitePrerenderPlugin } = await import('vite-prerender-plugin');

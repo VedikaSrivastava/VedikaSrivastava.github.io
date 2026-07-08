@@ -10,10 +10,6 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
   const [hasImageError, setHasImageError] = useState(false);
 
   useEffect(() => {
-    setHasImageError(false);
-  }, [item?.id]);
-
-  useEffect(() => {
     if (!item) {
       return;
     }

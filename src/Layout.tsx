@@ -44,7 +44,11 @@ export default function Layout() {
         />
       </main>
       <SiteFooter />
-      <ItemDetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />
+      <ItemDetailModal
+        key={selectedItem?.id ?? 'closed'}
+        item={selectedItem}
+        onClose={() => setSelectedItem(null)}
+      />
     </div>
   );
 }
