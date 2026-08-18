@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react';
 
 const PAGE_BOTTOM_THRESHOLD = 48;
-// How far down the visible area (below the header) the "reading line" sits.
-// A section becomes active once its top crosses this line, so the chip
-// switches while the section is filling the screen — not only when its top
-// has already scrolled all the way up to the header.
 const READING_LINE_RATIO = 0.35;
+const HEADER_SCROLL_THRESHOLD = 24;
 
 function getScrollAnchor(): number {
   const header = document.querySelector('header');
@@ -60,22 +57,39 @@ function resolveActiveSection(sectionIds: string[]): string | null {
   return activeSection;
 }
 
+function syncHeaderScrolled(scrollY: number) {
+  const scrolled = scrollY > HEADER_SCROLL_THRESHOLD;
+  const root = document.documentElement;
+  const current = root.dataset.headerScrolled === 'true';
+
+  if (current !== scrolled) {
+    root.dataset.headerScrolled = scrolled ? 'true' : 'false';
+  }
+}
+
 export function useActiveSection(sectionIds: string[]) {
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   useEffect(() => {
     let frameId = 0;
+    let lastActiveSection: string | null | undefined;
 
-    const updateActiveSection = () => {
-      setActiveSection(resolveActiveSection(sectionIds));
+    const updateFromScroll = () => {
+      const nextActiveSection = resolveActiveSection(sectionIds);
+      syncHeaderScrolled(window.scrollY);
+
+      if (nextActiveSection !== lastActiveSection) {
+        lastActiveSection = nextActiveSection;
+        setActiveSection(nextActiveSection);
+      }
     };
 
     const scheduleUpdate = () => {
       cancelAnimationFrame(frameId);
-      frameId = requestAnimationFrame(updateActiveSection);
+      frameId = requestAnimationFrame(updateFromScroll);
     };
 
-    updateActiveSection();
+    updateFromScroll();
     window.addEventListener('scroll', scheduleUpdate, { passive: true });
     window.addEventListener('resize', scheduleUpdate);
 
@@ -83,6 +97,7 @@ export function useActiveSection(sectionIds: string[]) {
       cancelAnimationFrame(frameId);
       window.removeEventListener('scroll', scheduleUpdate);
       window.removeEventListener('resize', scheduleUpdate);
+      delete document.documentElement.dataset.headerScrolled;
     };
   }, [sectionIds]);
 

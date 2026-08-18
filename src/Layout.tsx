@@ -12,16 +12,20 @@ export default function Layout() {
   const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
 
   return (
-    <div className="min-h-dvh overflow-x-hidden bg-void bg-[radial-gradient(circle_at_top_left,rgba(229,9,20,0.16),transparent_30rem),linear-gradient(180deg,#050505_0%,#050505_62%,#020202_100%)] font-sans text-copy">
+    <div className="min-h-dvh overflow-x-hidden bg-void font-sans text-copy">
       <SiteHeader />
       <main>
-        <HeroSection profile={siteContent.heroProfile} onOpen={setSelectedItem} />
+        <HeroSection
+          copy={siteContent.heroCopy}
+          profile={siteContent.heroProfile}
+          onOpen={setSelectedItem}
+        />
         <ExperienceRow items={siteContent.experience} onOpen={setSelectedItem} />
         <BrowseRow
           sectionId="research"
           eyebrow="Research"
           title="Research"
-          subtitle="Seven papers across healthcare AI research, geospatial computer vision, NLP, drone detection, style transfer, and voice systems. I like research that connects model behavior to real-world utility."
+          subtitle="Seven peer-reviewed publications and preprints across clinical AI, computer vision, NLP, and voice systems, including EEG cerebral-edema prediction, glycemic-response modeling, and ISS imagery geolocation."
           items={siteContent.research}
           onOpen={setSelectedItem}
           variant="compact"
@@ -30,7 +34,7 @@ export default function Layout() {
           sectionId="projects"
           eyebrow="Selected AI Projects"
           title="Projects"
-          subtitle="Side quests and deep dives across geospatial AI, Sanskrit NLP, agentic platforms, computer vision, embedded systems, and human-facing prototypes."
+          subtitle="Selected work across multimodal AI, NLP, 3D vision, and public-interest data, including both published research and exploratory systems."
           items={siteContent.projects}
           onOpen={setSelectedItem}
         />

@@ -1,4 +1,4 @@
-import profileAvatar from '../images/profile-avatar.png';
+import profileAvatar from '../images/profile-avatar-optimized.png';
 
 type ProfileAvatarIconProps = {
   className?: string;

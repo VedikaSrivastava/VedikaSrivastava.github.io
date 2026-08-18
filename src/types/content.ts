@@ -23,10 +23,23 @@ export type ContentItem = {
   linkLabel?: string;
   /** Brand color used to tint the tile backdrop (e.g. school color). */
   accent?: string;
+  /** Short proof point surfaced directly on a recruiter-facing card. */
+  proof?: string;
+};
+
+export type HeroCopy = {
+  label: string;
+  name: string;
+  role: string;
+  description: string;
+  secondaryDescription: string;
+  metadata: string[];
+  sidebar: Array<{ label: string; value: string }>;
 };
 
 export type SiteContent = {
   heroProfile: ContentItem;
+  heroCopy: HeroCopy;
   projects: ContentItem[];
   experience: ContentItem[];
   research: ContentItem[];
