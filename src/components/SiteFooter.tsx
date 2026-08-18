@@ -1,6 +1,5 @@
 import { contactLinks } from '../content/contact-links.ts';
 import type { ContactPlatform } from '../types/content.ts';
-import { useInView } from '../hooks/useInView.ts';
 import ScrollRail from './ScrollRail.tsx';
 
 function ContactIcon({ platform }: { platform: ContactPlatform }) {
@@ -77,15 +76,10 @@ function ContactTile({ href, label, platform, className = '' }: ContactTileProps
 }
 
 export default function SiteFooter() {
-  const { ref, isVisible } = useInView<HTMLElement>();
-
   return (
     <footer
-      ref={ref}
       id="contact"
-      className={`section-reveal relative isolate border-t border-line/60 px-4 pb-[calc(3rem+env(safe-area-inset-bottom,0px))] pt-10 sm:px-8 lg:px-12 ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-      }`}
+      className="relative isolate border-t border-line/60 px-4 pb-[calc(3rem+env(safe-area-inset-bottom,0px))] pt-10 sm:px-8 lg:px-12"
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 footer-glow" />
 
@@ -100,7 +94,9 @@ export default function SiteFooter() {
           Contact
         </h2>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70 sm:text-base">
-          Let&apos;s connect — reach out via email, LinkedIn, GitHub, Google Scholar, or Medium.
+          I am interested in applied AI, agentic systems, machine learning platform, and
+          forward-deployed engineering work where I can own systems from problem definition through
+          production.
         </p>
       </div>
 

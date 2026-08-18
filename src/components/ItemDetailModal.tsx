@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ContentItem } from '../types/content.ts';
 
 type ItemDetailModalProps = {
@@ -8,23 +8,71 @@ type ItemDetailModalProps = {
 
 export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps) {
   const [hasImageError, setHasImageError] = useState(false);
+  const dialogRef = useRef<HTMLElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!item) {
       return;
     }
 
+    returnFocusRef.current = document.activeElement as HTMLElement | null;
+    const scrollY = window.scrollY;
+    const previousStyles = {
+      overflow: document.body.style.overflow,
+      position: document.body.style.position,
+      top: document.body.style.top,
+      width: document.body.style.width,
+    };
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose();
+        return;
+      }
+
+      if (event.key === 'Tab' && dialogRef.current) {
+        const focusable = Array.from(
+          dialogRef.current.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
+        );
+
+        if (focusable.length === 0) {
+          event.preventDefault();
+          dialogRef.current.focus();
+          return;
+        }
+
+        const first = focusable[0];
+        const last = focusable.at(-1);
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
       }
     };
 
-    document.body.classList.add('overflow-hidden');
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
     window.addEventListener('keydown', onKeyDown);
+    closeButtonRef.current?.focus();
+
     return () => {
-      document.body.classList.remove('overflow-hidden');
       window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = previousStyles.overflow;
+      document.body.style.position = previousStyles.position;
+      document.body.style.top = previousStyles.top;
+      document.body.style.width = previousStyles.width;
+      window.scrollTo(0, scrollY);
+      returnFocusRef.current?.focus();
     };
   }, [item, onClose]);
 
@@ -34,21 +82,26 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
 
   const isAbout = item.id === 'hero-profile';
   const canShowImage = item.image && !hasImageError;
+  const titleId = `modal-title-${item.id}`;
 
   return (
     <div
       className="fixed inset-0 z-50 grid items-end sm:place-items-center sm:p-4"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="modal-title"
+      aria-labelledby={titleId}
     >
       <button
-        className="absolute inset-0 bg-black/80 backdrop-blur-xl"
+        className="absolute inset-0 bg-black/85"
         type="button"
         aria-label="Close details"
         onClick={onClose}
       />
-      <article className="relative max-h-[92dvh] w-full max-w-4xl animate-modal-in overflow-auto rounded-t-md bg-panel shadow-stream sm:max-h-[88svh] sm:rounded-md">
+      <article
+        ref={dialogRef}
+        className="relative max-h-[92dvh] w-full max-w-4xl animate-modal-in overflow-auto rounded-t-md bg-panel shadow-stream sm:max-h-[88svh] sm:rounded-md"
+        tabIndex={-1}
+      >
         {/* Billboard header: cover images fade into the panel with the title on
             top; logo images sit as a contained chip on a dark gradient. */}
         {canShowImage && item.imageStyle !== 'logo' ? (
@@ -69,7 +122,7 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
               </p>
               <h2
                 className="max-w-2xl pr-10 text-2xl leading-[0.95] font-black tracking-[-0.045em] text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)] sm:pr-0 sm:text-4xl lg:text-5xl"
-                id="modal-title"
+                id={titleId}
               >
                 {item.title}
               </h2>
@@ -92,7 +145,7 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
             </p>
             <h2
               className="max-w-2xl pr-10 text-2xl leading-[0.95] font-black tracking-[-0.045em] text-white sm:pr-0 sm:text-4xl lg:text-5xl"
-              id="modal-title"
+              id={titleId}
             >
               {item.title}
             </h2>
@@ -100,12 +153,13 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
         )}
 
         <button
+          ref={closeButtonRef}
           className="interactive absolute top-3 right-3 grid size-10 place-items-center rounded-full bg-black/70 text-2xl leading-none text-white/80 hover:text-white sm:top-4 sm:right-4"
           type="button"
           onClick={onClose}
           aria-label="Close details"
         >
-          ×
+          &times;
         </button>
 
         <div className="p-5 pt-4 pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] sm:p-9 sm:pt-5">
@@ -182,19 +236,19 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
                 )}
                 {item.period && (
                   <div>
-                    <span className="font-semibold text-white/40">Aired: </span>
+                    <span className="font-semibold text-white/40">Dates: </span>
                     <span className="font-semibold text-white/85">{item.period}</span>
                   </div>
                 )}
                 {item.location && (
                   <div>
-                    <span className="font-semibold text-white/40">Filmed in: </span>
+                    <span className="font-semibold text-white/40">Location: </span>
                     <span className="font-semibold text-white/85">{item.location}</span>
                   </div>
                 )}
                 {item.tags.length > 0 && (
                   <div>
-                    <span className="font-semibold text-white/40">Stack: </span>
+                    <span className="font-semibold text-white/40">Technical Stack: </span>
                     <span className="font-semibold text-white/85">{item.tags.join(', ')}</span>
                   </div>
                 )}

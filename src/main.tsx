@@ -4,7 +4,13 @@ import { initClarity } from './analytics/clarity.ts';
 import Layout from './Layout.tsx';
 import './styles/global.css';
 
-initClarity();
+const scheduleClarity = () => void initClarity();
+
+if ('requestIdleCallback' in window) {
+  window.requestIdleCallback(scheduleClarity, { timeout: 3000 });
+} else {
+  globalThis.setTimeout(scheduleClarity, 1500);
+}
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { observedSectionIds, siteNavigation } from '../content/navigation.ts';
 import { useActiveSection } from '../hooks/useActiveSection.ts';
 import { useNavIndicator } from '../hooks/useNavIndicator.ts';
@@ -48,27 +48,13 @@ function SectionNav({ activeSection }: { activeSection: string | null }) {
 }
 
 export default function SiteHeader() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const activeSection = useActiveSection(observedSectionIds);
 
-  useEffect(() => {
-    const updateHeader = () => setIsScrolled(window.scrollY > 24);
-    updateHeader();
-    window.addEventListener('scroll', updateHeader, { passive: true });
-    return () => window.removeEventListener('scroll', updateHeader);
-  }, []);
-
   return (
-    <header
-      className={`fixed top-0 left-0 z-20 w-full pt-[env(safe-area-inset-top,0px)] ${
-        isScrolled ? 'bg-void/96' : 'bg-linear-to-b from-void/95 via-void/70 to-transparent'
-      }`}
-    >
+    <header className="site-header fixed top-0 left-0 z-20 w-full pt-[env(safe-area-inset-top,0px)]">
       <div className="flex items-center gap-3 px-4 py-3 sm:gap-5 sm:px-8 lg:gap-8 lg:px-12">
         <a
-          className={`group interactive inline-flex shrink-0 items-center hover:-translate-y-px ${
-            isScrolled ? 'gap-3.5 sm:gap-4' : 'gap-0'
-          }`}
+          className="site-header-brand group interactive inline-flex shrink-0 items-center hover:-translate-y-px"
           href="#top"
           aria-label="Vedika Srivastava home"
         >
@@ -76,12 +62,8 @@ export default function SiteHeader() {
             <ProfileAvatarIcon />
           </span>
           <span
-            className={`hidden min-w-0 flex-col overflow-hidden leading-none transition-[max-width,opacity,transform] duration-300 ease-out sm:flex ${
-              isScrolled
-                ? 'max-w-[11rem] translate-x-0 opacity-100 lg:max-w-[12rem]'
-                : 'max-w-0 -translate-x-1 opacity-0'
-            }`}
-            aria-hidden={!isScrolled}
+            className="site-header-brand-text hidden min-w-0 flex-col overflow-hidden leading-none sm:flex"
+            aria-hidden="true"
           >
             <span className="text-[1.35rem] font-black tracking-[0.06em] text-signal-hot uppercase lg:text-[1.55rem]">
               Vedika

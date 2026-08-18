@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import type { ContentItem } from '../types/content.ts';
-import { useInView } from '../hooks/useInView.ts';
 import SectionHeader from './SectionHeader.tsx';
 import ScrollRail from './ScrollRail.tsx';
 
@@ -19,6 +18,8 @@ function ExperienceCardArtwork({ item }: { item: ContentItem }) {
         src={item.image}
         alt={item.imageAlt ?? ''}
         loading="lazy"
+        decoding="async"
+        sizes="(min-width: 1280px) 22vw, (min-width: 768px) 31vw, 100vw"
         onError={() => setHasImageError(true)}
       />
     );
@@ -51,50 +52,48 @@ function ExperienceCardArtwork({ item }: { item: ContentItem }) {
 }
 
 export default function ExperienceRow({ items, onOpen }: ExperienceRowProps) {
-  const { ref, isVisible } = useInView<HTMLElement>();
-
   return (
     <section
-      ref={ref}
       id="experience"
-      className={`section-reveal px-4 pb-12 sm:px-8 lg:px-12 ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-      }`}
+      className="px-4 pb-12 sm:px-8 lg:px-12"
       aria-labelledby="experience-title"
     >
       <SectionHeader
         eyebrow="Experience"
         title="Experience"
         titleId="experience-title"
-        subtitle="From healthcare AI research at Boston University / Boston Medical Center to founding-team applied AI engineering at Extuitive / Flagship Pioneering—the through-line is taking messy real-world problems and making them work in production."
+        subtitle="From founding-team AI product engineering to clinical ML research, the through-line is taking ambiguous, real-world problems and building systems that work beyond the prototype."
       />
-      <ScrollRail className="grid auto-cols-[clamp(17rem,34vw,22rem)] grid-flow-col gap-4 overflow-x-auto overscroll-x-contain ps-3 pe-1 pt-4 pb-9 snap-x snap-mandatory sm:pe-1.5 sm:snap-none">
-        {items.map((item, index) => (
+      <ScrollRail
+        className="grid auto-cols-[clamp(17rem,34vw,22rem)] grid-flow-col gap-4 overflow-x-auto overscroll-x-contain ps-3 pe-1 pt-4 pb-9 snap-x snap-proximity sm:pe-1.5 sm:snap-none"
+        role="list"
+      >
+        {items.map((item) => (
           <button
             className="group row-card-trigger block"
             key={item.id}
             type="button"
             onClick={() => onOpen(item)}
+            role="listitem"
           >
-            <span className="rank-index">{index + 1}</span>
             <span className="row-card-surface relative z-10 grid aspect-[5/6] min-w-0 overflow-hidden">
               <ExperienceCardArtwork item={item} />
               <span className="relative col-start-1 row-start-1 bg-linear-to-b from-black/10 from-10% via-black/40 via-48% to-black/96" />
-              <span className="relative col-start-1 row-start-1 flex min-w-0 flex-col justify-end p-4">
-                <span className="flex h-7 max-w-full items-center self-start truncate rounded-sm bg-signal px-2 text-[0.56rem] font-black tracking-wider text-white uppercase sm:text-[0.6rem]">
+              <span className="experience-card-copy relative col-start-1 row-start-1 min-w-0 px-3 pt-3 pb-7">
+                <span className="flex h-6 max-w-full items-center self-start truncate rounded-sm bg-signal px-2 text-[0.58rem] font-black tracking-wider text-white uppercase sm:text-[0.62rem]">
                   {item.period}
                 </span>
-                <span className="mt-3 min-h-[3.6rem] text-sm leading-tight font-black text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:text-base">
+                <span className="mt-2 min-h-[2.9rem] text-sm leading-tight font-black text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:text-base">
                   <span className="line-clamp-2">{item.title}</span>
                 </span>
-                <span className="mt-1 min-h-[3.7rem] text-xs leading-4 font-semibold text-white/78">
+                <span className="mt-1 min-h-[3rem] text-xs leading-4 font-semibold text-white/78">
                   <span className="line-clamp-2 block">{item.subtitle}</span>
                   {item.location && (
                     <span className="mt-1 block line-clamp-1">{item.location}</span>
                   )}
                 </span>
-                <span className="mt-3 text-xs leading-5 text-white/72">
-                  <span className="line-clamp-4">{item.summary}</span>
+                <span className="mt-1 min-h-[4rem] text-xs leading-4 text-white/72">
+                  <span className="line-clamp-3">{item.summary}</span>
                 </span>
               </span>
             </span>

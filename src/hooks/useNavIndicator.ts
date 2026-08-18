@@ -64,6 +64,6 @@ export function useNavIndicator(
     }
 
     const targetLeft = link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2;
-    nav.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
+    nav.scrollTo({ left: Math.max(0, targetLeft), behavior: 'auto' });
   }, [activeSection, linkRefs, navRef]);
 }

@@ -4,10 +4,12 @@ import { contentImages } from '../../images/index.ts';
 export const research: ContentItem[] = [
   {
     id: 'glycemic-response-modeling',
-    title: 'Predicting Glycemic Responses to Dietary Intake Among Non-diabetic Adults',
+    title:
+      'Predicting Glycemic Responses to Dietary Intake Among Non-diabetic Adults: an Evaluation of Modeling Approaches',
     subtitle: 'Circulation, 2026',
     image: contentImages.ahaLogo,
     imageStyle: 'logo',
+    rating: 'Peer Reviewed',
     tags: ['Healthcare AI', 'Glucose Modeling'],
     summary:
       'Modeling meal-informed glucose responses in non-diabetic adults using clinical and behavioral signals.',
@@ -39,6 +41,7 @@ export const research: ContentItem[] = [
     subtitle: 'Research Square, 2026',
     image: contentImages.researchSquareLogo,
     imageStyle: 'logo',
+    rating: 'Preprint',
     tags: ['EEG', 'Clinical AI', 'Time Series'],
     summary:
       'EEG-based cerebral edema prediction in post-cardiac-arrest patients using clinical time-series machine learning.',
@@ -66,10 +69,11 @@ export const research: ContentItem[] = [
   },
   {
     id: 'iss-geolocation-paper',
-    title: 'Geolocating Earth Imagery from ISS',
+    title: 'Geolocating Earth Imagery from ISS: Machine Learning for Astronaut Photography Mapping',
     subtitle: 'arXiv, 2025',
     image: contentImages.arxivLogo,
     imageStyle: 'logo',
+    rating: 'Preprint',
     tags: ['Computer Vision', 'Geospatial AI'],
     summary:
       'Machine learning for geolocating astronaut photography from the International Space Station.',
@@ -101,6 +105,7 @@ export const research: ContentItem[] = [
     subtitle: 'ACM ICIMMI, 2023',
     image: contentImages.acmLogo,
     imageStyle: 'logo',
+    rating: 'Peer Reviewed',
     tags: ['Style Transfer', 'Computer Vision'],
     summary:
       'Comparative evaluation of neural style transfer models across visual quality, speed, and quantitative metrics.',
@@ -132,6 +137,7 @@ export const research: ContentItem[] = [
     subtitle: 'Wiley, 2023',
     image: contentImages.wileyLogo,
     imageStyle: 'logo',
+    rating: 'Peer Reviewed',
     tags: ['NLP', 'Voice AI'],
     summary:
       'NLP-based Sanskrit voice bot designed around language preservation and conversational access.',
@@ -159,10 +165,11 @@ export const research: ContentItem[] = [
   },
   {
     id: 'drone-detection-paper',
-    title: 'Drone Detection using YOLO and SSD',
+    title: 'Drone Detection using YOLO and SSD: A Comparative Study',
     subtitle: 'IEEE IConSIP, 2022',
     image: contentImages.ieeeLogo,
     imageStyle: 'logo',
+    rating: 'Peer Reviewed',
     tags: ['YOLO', 'SSD', 'Object Detection'],
     summary:
       'YOLO and SSD comparison for drone detection as a portable alternative to expensive sensing systems.',
@@ -194,6 +201,7 @@ export const research: ContentItem[] = [
     subtitle: 'ECS Transactions, IOP, 2022',
     image: contentImages.ecsLogo,
     imageStyle: 'logo',
+    rating: 'Peer Reviewed',
     tags: ['Voice AI', 'Smart Devices'],
     summary:
       'Voice assistant architecture for smart-device interaction, command handling, and response generation.',
