@@ -28,7 +28,6 @@ export default function Layout() {
           subtitle="Seven peer-reviewed publications and preprints across clinical AI, computer vision, NLP, and voice systems, including EEG cerebral-edema prediction, glycemic-response modeling, and ISS imagery geolocation."
           items={siteContent.research}
           onOpen={setSelectedItem}
-          variant="compact"
         />
         <BrowseRow
           sectionId="projects"

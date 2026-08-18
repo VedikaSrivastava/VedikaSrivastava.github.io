@@ -122,7 +122,7 @@ export default function BrowseRow({
                     : 'bg-linear-to-b from-black/0 from-20% via-black/35 via-50% to-black/95'
                 }`}
               />
-              <span className="relative col-start-1 row-start-1 flex min-w-0 flex-col justify-end px-3 pt-3 pb-7">
+              <span className="browse-card-copy relative col-start-1 row-start-1 min-w-0 px-3 pt-3 pb-7">
                 <span className="flex h-6 max-w-full items-center self-start truncate rounded-sm bg-signal px-2 text-[0.58rem] font-black tracking-wider text-white uppercase sm:text-[0.62rem]">
                   {item.rating ?? item.tags[0]}
                 </span>

@@ -260,6 +260,32 @@
     @apply font-bold text-white underline decoration-white/25 underline-offset-4 transition-colors hover:text-signal-hot;
   }
 
+  .browse-card-copy,
+  .experience-card-copy {
+    display: grid;
+    align-content: end;
+    justify-items: start;
+    row-gap: 0.5rem;
+  }
+
+  .browse-card-copy {
+    grid-template-rows: 1.5rem 2.9rem 2rem;
+  }
+
+  .experience-card-copy {
+    grid-template-rows: 1.5rem 2.9rem 3rem 4rem;
+  }
+
+  .browse-card-copy > *,
+  .experience-card-copy > * {
+    margin-top: 0;
+  }
+
+  .browse-card-copy > :not(:first-child),
+  .experience-card-copy > :not(:first-child) {
+    width: 100%;
+  }
+
   @media (max-width: 39.999rem) {
     .research-meta > span + span::before {
       content: none;

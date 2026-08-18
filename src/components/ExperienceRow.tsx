@@ -79,21 +79,21 @@ export default function ExperienceRow({ items, onOpen }: ExperienceRowProps) {
             <span className="row-card-surface relative z-10 grid aspect-[5/6] min-w-0 overflow-hidden">
               <ExperienceCardArtwork item={item} />
               <span className="relative col-start-1 row-start-1 bg-linear-to-b from-black/10 from-10% via-black/40 via-48% to-black/96" />
-              <span className="relative col-start-1 row-start-1 flex min-w-0 flex-col justify-end px-4 pt-4 pb-8">
-                <span className="flex h-7 max-w-full items-center self-start truncate rounded-sm bg-signal px-2 text-[0.56rem] font-black tracking-wider text-white uppercase sm:text-[0.6rem]">
+              <span className="experience-card-copy relative col-start-1 row-start-1 min-w-0 px-3 pt-3 pb-7">
+                <span className="flex h-6 max-w-full items-center self-start truncate rounded-sm bg-signal px-2 text-[0.58rem] font-black tracking-wider text-white uppercase sm:text-[0.62rem]">
                   {item.period}
                 </span>
-                <span className="mt-3 min-h-[3.6rem] text-sm leading-tight font-black text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:text-base">
+                <span className="mt-2 min-h-[2.9rem] text-sm leading-tight font-black text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:text-base">
                   <span className="line-clamp-2">{item.title}</span>
                 </span>
-                <span className="mt-1 min-h-[3.7rem] text-xs leading-4 font-semibold text-white/78">
+                <span className="mt-1 min-h-[3rem] text-xs leading-4 font-semibold text-white/78">
                   <span className="line-clamp-2 block">{item.subtitle}</span>
                   {item.location && (
                     <span className="mt-1 block line-clamp-1">{item.location}</span>
                   )}
                 </span>
-                <span className="mt-3 min-h-[6.25rem] text-xs leading-5 text-white/72">
-                  <span className="line-clamp-4">{item.summary}</span>
+                <span className="mt-1 min-h-[4rem] text-xs leading-4 text-white/72">
+                  <span className="line-clamp-3">{item.summary}</span>
                 </span>
               </span>
             </span>
