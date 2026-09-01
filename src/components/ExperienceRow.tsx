@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { ContentItem } from '../types/content.ts';
+import ContentImg from './ContentImg.tsx';
 import SectionHeader from './SectionHeader.tsx';
 import ScrollRail from './ScrollRail.tsx';
 
@@ -13,13 +14,13 @@ function ExperienceCardArtwork({ item }: { item: ContentItem }) {
 
   if (item.image && !hasImageError) {
     return (
-      <img
+      <ContentImg
         className="col-start-1 row-start-1 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04]"
-        src={item.image}
+        image={item.image}
         alt={item.imageAlt ?? ''}
         loading="lazy"
         decoding="async"
-        sizes="(min-width: 1280px) 22vw, (min-width: 768px) 31vw, 100vw"
+        sizes="(min-width: 1280px) 22vw, (min-width: 768px) 31vw, 85vw"
         onError={() => setHasImageError(true)}
       />
     );

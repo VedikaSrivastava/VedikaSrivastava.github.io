@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { BrowseRowVariant, ContentItem } from '../types/content.ts';
+import ContentImg from './ContentImg.tsx';
 import SectionHeader from './SectionHeader.tsx';
 import ScrollRail from './ScrollRail.tsx';
 
@@ -88,7 +89,7 @@ export default function BrowseRow({
           >
             <span className="row-card-surface relative z-10 grid h-full min-w-0 overflow-hidden">
               {item.image ? (
-                <img
+                <ContentImg
                   className={`col-start-1 row-start-1 h-full w-full ${
                     isEducationRow
                       ? 'logo-tile-art object-contain px-14 pt-8 pb-32 drop-shadow-[0_18px_28px_rgba(0,0,0,0.65)] transition-transform duration-300 ease-out group-hover:scale-[1.06]'
@@ -101,11 +102,11 @@ export default function BrowseRow({
                       ? ({ '--tile-accent': item.accent } as CSSProperties)
                       : undefined
                   }
-                  src={item.image}
+                  image={item.image}
                   alt=""
                   loading="lazy"
                   decoding="async"
-                  sizes="(min-width: 1280px) 22vw, (min-width: 768px) 31vw, 100vw"
+                  sizes="(min-width: 1280px) 22vw, (min-width: 768px) 31vw, 85vw"
                 />
               ) : (
                 <span className="col-start-1 row-start-1 grid h-full place-items-center bg-[radial-gradient(circle_at_top_right,rgba(229,9,20,0.38),transparent_12rem),linear-gradient(135deg,#272727,#090909)] text-6xl font-black tracking-[-0.12em] text-white/16">
