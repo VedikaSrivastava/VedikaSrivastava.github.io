@@ -1,4 +1,5 @@
 import type { ContentItem } from '../../types/content.ts';
+import { contentImages } from '../../images/index.ts';
 
 export const experience: ContentItem[] = [
   {
@@ -7,7 +8,7 @@ export const experience: ContentItem[] = [
     subtitle: 'Extuitive / Flagship Pioneering',
     location: 'Boston, MA',
     period: 'Jun 2025 - Present',
-    image: '/images/experience/extuitive-ai-saas.jpg',
+    image: contentImages.extuitive,
     imageAlt: 'Abstract AI workflow system with scoring nodes and integration pipelines.',
     rating: 'Featured',
     tags: [
@@ -57,7 +58,7 @@ export const experience: ContentItem[] = [
     subtitle: 'Boston University / Boston Medical Center',
     location: 'Boston, MA',
     period: 'Sep 2024 - Jun 2025',
-    image: '/images/experience/bu-bmc-healthcare-ai.jpg',
+    image: contentImages.buBmc,
     imageAlt: 'Abstract clinical AI scene with EEG signals and connected medical data.',
     rating: 'Clinical AI',
     tags: [
@@ -105,7 +106,7 @@ export const experience: ContentItem[] = [
     subtitle: 'BeSpoke Care Inc.',
     location: 'Boston, MA / Contract',
     period: 'Jun 2024 - Feb 2025',
-    image: '/images/experience/my-phoenyx-voice-ai.jpg',
+    image: contentImages.phoenyx,
     imageAlt: 'Abstract multimodal voice AI system connected to smart devices.',
     rating: 'Voice AI',
     tags: [
@@ -155,7 +156,7 @@ export const experience: ContentItem[] = [
     subtitle: 'Time Machine Learning Inc.',
     location: 'Boston, MA / Contract',
     period: 'Mar 2024 - Jun 2024',
-    image: '/images/experience/time-machine-rag.jpg',
+    image: contentImages.timeMachine,
     imageAlt: 'Abstract retrieval system with document blocks and vector connections.',
     rating: 'RAG',
     tags: ['RAG', 'Vector Search', 'Mistral', 'Azure MLOps', 'Python', 'SaaS'],
@@ -192,7 +193,7 @@ export const experience: ContentItem[] = [
     subtitle: 'Institute for Global Sustainability / NREL',
     location: 'Boston, MA',
     period: 'May 2023 - Jul 2023',
-    image: '/images/experience/nrel-energy-data.jpg',
+    image: contentImages.nrel,
     imageAlt: 'Abstract energy policy analytics with data grids and chart lines.',
     rating: 'Data Science',
     tags: ['Python', 'scikit-learn', 'spaCy', 'Plotly', 'Policy Analytics'],
@@ -224,7 +225,7 @@ export const experience: ContentItem[] = [
     subtitle: 'Boston University',
     location: 'Boston, MA',
     period: 'Jan 2023 - Dec 2023',
-    image: '/images/experience/bu-teaching-ai.jpg',
+    image: contentImages.buTeaching,
     imageAlt: 'Abstract collaborative machine-learning research environment.',
     rating: 'Research',
     tags: ['Python', 'Docker', 'NLP', 'Deep Learning', 'Feature Engineering'],
@@ -257,7 +258,7 @@ export const experience: ContentItem[] = [
     subtitle: 'IBM',
     location: 'Pune, India',
     period: 'Jan 2022 - Jul 2022',
-    image: '/images/experience/ibm-backend-systems.jpg',
+    image: contentImages.ibm,
     imageAlt: 'Abstract backend service architecture with cloud infrastructure connections.',
     rating: 'Backend',
     tags: ['Java', 'Quarkus', 'OpenJDK 11', 'Microservices'],
@@ -290,7 +291,7 @@ export const experience: ContentItem[] = [
     subtitle: 'Tech Mahindra',
     location: 'Pune, India',
     period: 'Oct 2020 - Dec 2021',
-    image: '/images/experience/techmahindra-nlp.jpg',
+    image: contentImages.techMahindra,
     imageAlt: 'Abstract multilingual NLP and computer-vision research signals.',
     rating: 'NLP + CV',
     tags: ['Python', 'BeautifulSoup', 'NLTK', 'CNN', 'YOLOv5', 'SSD'],

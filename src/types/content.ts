@@ -3,13 +3,18 @@ export type DetailSection = {
   body: string;
 };
 
+export type ContentImage = {
+  src: string;
+  srcSet?: string;
+};
+
 export type ContentItem = {
   id: string;
   title: string;
   subtitle: string;
   location?: string;
   period?: string;
-  image?: string;
+  image?: ContentImage;
   imageAlt?: string;
   /** How the modal billboard renders the image: full-bleed cover (default) or a contained logo chip. */
   imageStyle?: 'cover' | 'logo';
