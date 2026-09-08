@@ -4,6 +4,115 @@ import { legacyProjects } from './legacy-projects.ts';
 
 const featuredProjects: ContentItem[] = [
   {
+    id: 'rxgap',
+    title: 'RxGap',
+    subtitle: 'Pharmacy closure impact explorer',
+    image: contentImages.rxgap,
+    imageAlt:
+      'RxGap map UI showing H3 demand cells and a selected pharmacy closure scenario in Greater Boston.',
+    rating: 'Geospatial Product',
+    tags: ['Geospatial', 'Overture Maps', 'H3', 'React', 'Python', 'DuckDB'],
+    summary:
+      'Interactive geospatial tool modeling how pharmacy closures affect walking access for no-vehicle households across Greater Boston.',
+    proof: 'Live at rxgap.vercel.app',
+    details: [],
+    sections: [
+      {
+        label: 'Problem',
+        body: 'Permanent pharmacy closures can leave no-vehicle households without a reasonable walk to a licensed storefront. Planners and residents need a clearer picture than a list of remaining pins.',
+      },
+      {
+        label: 'Approach',
+        body: 'Combined Overture Maps transportation, buildings, and places with ACS no-vehicle household data, H3 aggregation, pedestrian-network routing, and Massachusetts licensed pharmacy records.',
+      },
+      {
+        label: 'What I Built',
+        body: 'Built an end-to-end pipeline and React app where a user selects a walk-in pharmacy, sets a max walking threshold, simulates permanent closure, and sees which households lose access and how much farther the next licensed pharmacy becomes.',
+      },
+      {
+        label: 'Result',
+        body: 'Shipped a deployed public product at rxgap.vercel.app covering a 22-municipality Greater Boston study area.',
+      },
+    ],
+    link: 'https://rxgap.vercel.app/',
+    linkLabel: 'Live demo',
+    secondaryLink: 'https://github.com/VedikaSrivastava/rxgap',
+    secondaryLinkLabel: 'View on GitHub',
+  },
+  {
+    id: 'slack-qa-agent',
+    title: 'Slack QA Agent',
+    subtitle: 'Grounded multi-turn Slack agent',
+    image: contentImages.slackQaAgent,
+    imageAlt:
+      'Slack QA Agent product card showing grounded LangGraph retrieval flow, progress streaming, multi-turn memory, and native stop.',
+    rating: 'Agent Infrastructure',
+    tags: ['LangGraph', 'Slack', 'Retrieval', 'Inngest', 'PostgreSQL', 'Docker'],
+    summary:
+      'Grounded Slack agent with multi-turn retrieval, streaming progress, cancellation, evaluation, and production-style orchestration.',
+    proof: 'Offline evaluation harness included',
+    details: [],
+    sections: [
+      {
+        label: 'Problem',
+        body: 'Slack Q&A bots often answer without evidence, lose thread context, or lack the operational controls needed for reliable multi-turn use.',
+      },
+      {
+        label: 'Approach',
+        body: 'Designed the agent around grounded retrieval, bounded LangGraph execution, durable turn routing with Inngest, and Slack-native progress plus cooperative stop handling.',
+      },
+      {
+        label: 'What I Built',
+        body: 'Built a Dockerized stack with Postgres, read-only knowledge-base retrieval, source-aware answers, thread follow-ups, abstention when evidence is thin, optional Langfuse tracing, and a repeatable evaluation harness.',
+      },
+      {
+        label: 'Result',
+        body: 'A production-style agent path that favors measurable behavior over chatbot demos, including offline benchmarks and documented guarantees versus best-effort behavior.',
+      },
+    ],
+    link: 'https://github.com/VedikaSrivastava/slack-qa-agent',
+    linkLabel: 'View on GitHub',
+    secondaryLink:
+      'https://drive.google.com/file/d/1rVp5-6ADHC9LO_stpBdYzfSEDQwUxOn3/view?usp=sharing',
+    secondaryLinkLabel: 'Watch demo',
+  },
+  {
+    id: 'voice-agent-eval',
+    title: 'Voice Agent Eval',
+    subtitle: 'Post-call voice agent evaluation toolkit',
+    image: contentImages.voiceAgentEval,
+    imageAlt:
+      'Voice Agent Eval scorecard dashboard with overall score, response-quality metrics, conversation timeline, and pip install command.',
+    rating: 'Evaluation Toolkit',
+    tags: ['Python', 'LLM Evaluation', 'Audio Analysis', 'OpenAI', 'Streamlit', 'PyPI'],
+    summary:
+      'Open-source toolkit for evaluating voice agents across response quality, latency, turn-taking, factuality, and voice delivery.',
+    proof: 'Available on PyPI · pip install voice-agent-eval',
+    details: [],
+    sections: [
+      {
+        label: 'Problem',
+        body: 'A transcript can look fine while the call feels broken, and smooth audio can hide weak answers. Voice-agent quality needs both deterministic interaction metrics and structured response review.',
+      },
+      {
+        label: 'Approach',
+        body: 'Separated audio and text signals in one report: timing, interruptions, and voice-delivery features from the recording, plus LLM-based scoring of task handling, relevance, context retention, and factual coverage.',
+      },
+      {
+        label: 'What I Built',
+        body: 'Shipped an installable Python package, CLI, and Streamlit app with a typed report pipeline, speaker-aware evaluation, and CI validation around the audio and packaging path.',
+      },
+      {
+        label: 'Result',
+        body: 'Published as voice-agent-eval on PyPI so teams can evaluate recorded customer/agent calls from code, the command line, or a local app.',
+      },
+    ],
+    link: 'https://pypi.org/project/voice-agent-eval/',
+    linkLabel: 'View on PyPI',
+    secondaryLink: 'https://github.com/VedikaSrivastava/voice-agent-eval',
+    secondaryLinkLabel: 'View on GitHub',
+  },
+  {
     id: 'iss-earth-imagery',
     title: 'ISS Earth Imagery Geolocation',
     subtitle: 'Geospatial computer vision for astronaut imagery',

@@ -33,7 +33,7 @@ export default function Layout() {
           sectionId="projects"
           eyebrow="Selected AI Projects"
           title="Projects"
-          subtitle="Selected work across multimodal AI, NLP, 3D vision, and public-interest data, including both published research and exploratory systems."
+          subtitle="Selected work across geospatial products, agent infrastructure, evaluation tooling, multimodal AI, and public-interest data."
           items={siteContent.projects}
           onOpen={setSelectedItem}
         />
