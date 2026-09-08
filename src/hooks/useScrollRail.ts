@@ -33,7 +33,7 @@ export function useScrollRail() {
 
     element.scrollBy({
       left: direction === 'left' ? -amount : amount,
-      behavior: 'auto',
+      behavior: 'smooth',
     });
   }, []);
 

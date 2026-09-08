@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { ContentItem, HeroCopy } from '../types/content.ts';
 
 type HeroSectionProps = {
@@ -28,6 +29,10 @@ function InfoIcon() {
   );
 }
 
+function heroDelay(ms: number): CSSProperties {
+  return { '--hero-delay': `${ms}ms` } as CSSProperties;
+}
+
 export default function HeroSection({ copy, profile, onOpen }: HeroSectionProps) {
   return (
     <section
@@ -44,22 +49,29 @@ export default function HeroSection({ copy, profile, onOpen }: HeroSectionProps)
 
       <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] items-end gap-8 lg:grid-cols-[minmax(0,1fr)_23rem]">
         <div className="min-w-0 max-w-4xl">
-          <p className="mb-4">
+          <p className="hero-in mb-4" style={heroDelay(0)}>
             <span className="text-[0.65rem] font-black tracking-[0.34em] text-white/55 uppercase sm:text-xs">
               {copy.label}
             </span>
           </p>
           <h1
             id="hero-title"
-            className="max-w-full text-[clamp(2.55rem,11.5vw,7rem)] leading-[0.86] font-black tracking-[-0.075em] text-white"
+            className="hero-in max-w-full text-[clamp(2.55rem,11.5vw,7rem)] leading-[0.86] font-black tracking-[-0.075em] text-white"
+            style={heroDelay(50)}
           >
             {copy.name}
           </h1>
-          <p className="mt-4 max-w-full text-[clamp(1.55rem,5vw,3rem)] leading-none font-black tracking-[-0.04em] text-white">
+          <p
+            className="hero-in mt-4 max-w-full text-[clamp(1.55rem,5vw,3rem)] leading-none font-black tracking-[-0.04em] text-white"
+            style={heroDelay(100)}
+          >
             {copy.role}
           </p>
 
-          <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm font-bold sm:text-base">
+          <div
+            className="hero-in mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm font-bold sm:text-base"
+            style={heroDelay(150)}
+          >
             <span className="text-[#46d369]">{copy.metadata[0]}</span>
             <span className="text-white/60">{copy.metadata[1]}</span>
             <span className="text-white/60">{copy.metadata[2]}</span>
@@ -71,21 +83,30 @@ export default function HeroSection({ copy, profile, onOpen }: HeroSectionProps)
             </span>
           </div>
 
-          <div className="mt-4 flex items-center gap-2.5">
+          <div className="hero-in mt-4 flex items-center gap-2.5" style={heroDelay(180)}>
             <span className="h-7 w-1 rounded-full bg-signal shadow-signal-sm" aria-hidden="true" />
             <span className="text-sm font-bold text-white sm:text-base">
               Trending in Applied AI
             </span>
           </div>
 
-          <p className="mt-5 max-w-3xl text-base leading-7 text-white/82 sm:text-lg">
+          <p
+            className="hero-in mt-5 max-w-3xl text-base leading-7 text-white/82 sm:text-lg"
+            style={heroDelay(220)}
+          >
             {copy.description}
           </p>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-white/62 sm:text-base">
+          <p
+            className="hero-in mt-3 max-w-3xl text-sm leading-6 text-white/62 sm:text-base"
+            style={heroDelay(250)}
+          >
             {copy.secondaryDescription}
           </p>
 
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div
+            className="hero-in mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+            style={heroDelay(300)}
+          >
             <a className="btn-primary" href="#experience" aria-label="Play - jump to experience">
               <PlayIcon />
               Play
@@ -97,7 +118,10 @@ export default function HeroSection({ copy, profile, onOpen }: HeroSectionProps)
           </div>
         </div>
 
-        <aside className="min-w-0 rounded-md border border-line bg-panel/92 p-5 text-sm leading-6 shadow-stream">
+        <aside
+          className="hero-in min-w-0 rounded-md border border-line bg-panel/92 p-5 text-sm leading-6 shadow-stream"
+          style={heroDelay(200)}
+        >
           <dl className="grid gap-3.5">
             {copy.sidebar.map((item) => (
               <div key={item.label}>

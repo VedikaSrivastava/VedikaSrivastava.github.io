@@ -24,7 +24,9 @@
   --color-rank-stroke: rgb(255 255 255 / 0.48);
 
   --shadow-stream: 0 24px 80px rgba(0, 0, 0, 0.55);
-  --shadow-stream-lg: 0 28px 90px rgba(0, 0, 0, 0.72);
+  --shadow-stream-lg:
+    0 14px 28px rgba(0, 0, 0, 0.55), 0 36px 72px rgba(0, 0, 0, 0.78),
+    0 56px 110px rgba(0, 0, 0, 0.45);
   --shadow-signal-sm: 0 0 18px color-mix(in srgb, var(--color-signal) 45%, transparent);
   --shadow-signal-md: 0 0 32px color-mix(in srgb, var(--color-signal) 42%, transparent);
 
@@ -35,6 +37,8 @@
   --duration-nav: 300ms;
 
   --animate-modal-in: modal-in var(--duration-modal) var(--ease-stream);
+  --animate-modal-out: modal-out var(--duration-modal) var(--ease-stream) forwards;
+  --animate-hero-in: hero-in 380ms ease-out both;
 }
 
 @keyframes modal-in {
@@ -46,6 +50,30 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modal-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -130,6 +158,25 @@
     transition-duration: var(--duration-reveal);
   }
 
+  .hero-in {
+    animation: var(--animate-hero-in);
+    animation-delay: var(--hero-delay, 0ms);
+  }
+
+  .row-card-stagger {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .row-cards-in .row-card-stagger {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 280ms ease-out,
+      transform 280ms ease-out;
+    transition-delay: calc(min(var(--stagger, 0), 7) * 45ms);
+  }
+
   .interactive {
     @apply transition;
     transition-duration: var(--duration-interactive);
@@ -143,18 +190,18 @@
   }
 
   .row-card-surface {
-    @apply rounded-sm border border-line bg-card shadow-stream group-hover:scale-[1.02] group-hover:border-white/40 group-hover:bg-card-hover group-hover:shadow-stream-lg group-focus-visible:scale-[1.02] group-focus-visible:border-white;
-    /* Don't transition box-shadow: animating an 80px-blur shadow repaints
-       the card every frame and makes hover feel sticky. It swaps instantly
-       instead, which reads fine at this scale. */
-    @apply transition-[transform,background-color,border-color];
-    transition-duration: var(--duration-interactive);
+    @apply rounded-sm border border-line bg-card shadow-stream group-hover:-translate-y-1 group-hover:scale-[1.045] group-hover:bg-card-hover group-hover:shadow-stream-lg group-focus-visible:-translate-y-1 group-focus-visible:scale-[1.045] group-focus-visible:shadow-stream-lg;
+    /* Transform only — shadow swaps instantly (blur animation feels sticky). */
+    @apply transition-transform;
+    transition-duration: 140ms;
+    transition-timing-function: ease-out;
   }
 
   .contact-tile-surface {
-    @apply relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-md border border-white/10 bg-white/[0.03] shadow-stream group-hover:scale-[1.02] group-hover:border-white/40 group-focus-visible:scale-[1.02];
-    @apply transition-[transform,border-color];
-    transition-duration: var(--duration-interactive);
+    @apply relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-md border border-white/10 bg-white/[0.03] shadow-stream group-hover:-translate-y-0.5 group-hover:scale-[1.04] group-hover:shadow-stream-lg group-focus-visible:-translate-y-0.5 group-focus-visible:scale-[1.04] group-focus-visible:shadow-stream-lg;
+    @apply transition-transform;
+    transition-duration: 140ms;
+    transition-timing-function: ease-out;
   }
 
   .contact-tile-surface[data-platform='email'] {
@@ -240,15 +287,15 @@
   }
 
   .btn-primary {
-    @apply inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-sm bg-white px-6 py-3 text-sm font-black text-void hover:bg-white/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto;
-    @apply transition-[background-color];
-    transition-duration: var(--duration-interactive);
+    @apply inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-sm bg-white px-6 py-3 text-sm font-black text-void hover:bg-white/85 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto;
+    @apply transition-[background-color,transform];
+    transition-duration: 140ms;
   }
 
   .btn-secondary {
-    @apply inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-sm bg-white/22 px-6 py-3 text-sm font-black text-white hover:bg-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto;
-    @apply transition-[background-color];
-    transition-duration: var(--duration-interactive);
+    @apply inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-sm bg-white/22 px-6 py-3 text-sm font-black text-white hover:bg-white/30 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:w-auto;
+    @apply transition-[background-color,transform];
+    transition-duration: 140ms;
   }
 
   .research-meta > span + span::before {
@@ -428,15 +475,25 @@
   @media (prefers-reduced-motion: reduce) {
     .section-reveal,
     .row-card-surface,
+    .row-cards-in .row-card-stagger,
     .interactive,
     .contact-tile-surface,
     .contact-tile-accent,
-    .nav-indicator {
+    .nav-indicator,
+    .btn-primary,
+    .btn-secondary {
       transition-duration: 0.01ms !important;
     }
 
-    .animate-modal-in {
-      animation: none;
+    .hero-in,
+    .animate-modal-in,
+    .animate-modal-out {
+      animation: none !important;
+    }
+
+    .row-card-stagger {
+      opacity: 1;
+      transform: none;
     }
   }
 }

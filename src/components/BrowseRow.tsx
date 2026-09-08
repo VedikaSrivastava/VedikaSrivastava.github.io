@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { BrowseRowVariant, ContentItem } from '../types/content.ts';
+import { useInView } from '../hooks/useInView.ts';
 import ContentImg from './ContentImg.tsx';
 import SectionHeader from './SectionHeader.tsx';
 import ScrollRail from './ScrollRail.tsx';
@@ -45,11 +46,13 @@ export default function BrowseRow({
   const isEducationRow = sectionId === 'education';
   const isLogoTile = sectionId === 'research';
   const { cols, aspect } = variantStyles[variant];
+  const { ref: cardsRef, isVisible } = useInView<HTMLElement>();
 
   return (
     <section
+      ref={cardsRef}
       id={sectionId}
-      className="px-4 pb-12 sm:px-8 lg:px-12"
+      className={`px-4 pb-12 sm:px-8 lg:px-12 ${isVisible ? 'row-cards-in' : ''}`}
       aria-labelledby={`${sectionId}-title`}
     >
       <SectionHeader
@@ -79,13 +82,14 @@ export default function BrowseRow({
         className={`grid grid-flow-col gap-3 overflow-x-auto overscroll-x-contain px-1 pt-4 pb-9 snap-x snap-proximity sm:px-1.5 sm:snap-none ${cols}`}
         role="list"
       >
-        {items.map((item) => (
+        {items.map((item, index) => (
           <button
-            className={`group row-card-trigger grid origin-center ${aspect}`}
+            className={`group row-card-trigger row-card-stagger grid origin-center ${aspect}`}
             key={item.id}
             type="button"
             onClick={() => onOpen(item)}
             role="listitem"
+            style={{ '--stagger': index } as CSSProperties}
           >
             <span className="row-card-surface relative z-10 grid h-full min-w-0 overflow-hidden">
               {item.image ? (
