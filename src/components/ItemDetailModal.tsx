@@ -227,15 +227,29 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
                 <div>
                   <span className="font-semibold text-white/40">{item.subtitle}</span>
                 </div>
-                {item.link && (
-                  <a
-                    className="btn-primary w-full justify-center sm:w-auto sm:justify-start"
-                    href={item.link}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {item.linkLabel ?? 'Open link'}
-                  </a>
+                {(item.link || item.secondaryLink) && (
+                  <div className="grid gap-2 sm:justify-items-start">
+                    {item.link && (
+                      <a
+                        className="btn-primary w-full justify-center sm:w-auto sm:justify-start"
+                        href={item.link}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {item.linkLabel ?? 'Open link'}
+                      </a>
+                    )}
+                    {item.secondaryLink && (
+                      <a
+                        className="btn-secondary w-full justify-center sm:w-auto sm:justify-start"
+                        href={item.secondaryLink}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {item.secondaryLinkLabel ?? 'Open link'}
+                      </a>
+                    )}
+                  </div>
                 )}
                 {item.period && (
                   <div>

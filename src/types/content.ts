@@ -26,6 +26,9 @@ export type ContentItem = {
   sections?: DetailSection[];
   link?: string;
   linkLabel?: string;
+  /** Optional secondary external CTA (e.g. GitHub beside a live demo). */
+  secondaryLink?: string;
+  secondaryLinkLabel?: string;
   /** Brand color used to tint the tile backdrop (e.g. school color). */
   accent?: string;
   /** Short proof point surfaced directly on a recruiter-facing card. */

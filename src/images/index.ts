@@ -50,6 +50,12 @@ import ibm from './experience/ibm-backend-systems.webp';
 import ibmCard from './experience/ibm-backend-systems-800.webp';
 import techMahindra from './experience/techmahindra-nlp.webp';
 import techMahindraCard from './experience/techmahindra-nlp-800.webp';
+import rxgap from './rxgap.webp';
+import rxgapCard from './rxgap-800.webp';
+import slackQaAgent from './slack-qa-agent.webp';
+import slackQaAgentCard from './slack-qa-agent-800.webp';
+import voiceAgentEval from './voice-agent-eval.webp';
+import voiceAgentEvalCard from './voice-agent-eval-800.webp';
 
 function photo(src: string, card: string, width: number): ContentImage {
   return {
@@ -93,4 +99,7 @@ export const contentImages = {
   buTeaching: photo(buTeaching, buTeachingCard, 1200),
   ibm: photo(ibm, ibmCard, 1200),
   techMahindra: photo(techMahindra, techMahindraCard, 1200),
+  rxgap: photo(rxgap, rxgapCard, 1200),
+  slackQaAgent: photo(slackQaAgent, slackQaAgentCard, 1600),
+  voiceAgentEval: photo(voiceAgentEval, voiceAgentEvalCard, 1200),
 } as const;
