@@ -117,7 +117,8 @@ const featuredProjects: ContentItem[] = [
     title: 'ISS Earth Imagery Geolocation',
     subtitle: 'Geospatial computer vision for astronaut imagery',
     image: contentImages.issGeolocate,
-    imageAlt: 'Earth imagery viewed from orbit.',
+    imageAlt:
+      'ISS geolocation match showing a Cape Cod query image, best-matched map tile, and broader area of interest.',
     rating: 'Multimodal AI',
     tags: ['VGG-16', 'ImageNet', 'SIFT', 'GPT-4 Vision', 'Docker'],
     summary:
@@ -144,6 +145,8 @@ const featuredProjects: ContentItem[] = [
     ],
     link: 'https://arxiv.org/abs/2504.21194',
     linkLabel: 'Read the paper',
+    secondaryLink: 'https://github.com/VedikaSrivastava/ml-terc-image-geolocation',
+    secondaryLinkLabel: 'View on GitHub',
   },
   {
     id: 'stock-investment-advisor',
@@ -191,7 +194,7 @@ const featuredProjects: ContentItem[] = [
     title: '3D Text2Live',
     subtitle: 'Text-guided localized 3D editing',
     image: contentImages.textToLive,
-    imageAlt: 'Colorful three-dimensional scene rendering.',
+    imageAlt: '3D Text2LIVE result showing a ship on fire from multiple camera angles.',
     rating: '3D Vision',
     tags: ['NeRF', 'CLIP', 'Text-Guided Editing', '3D Rendering'],
     summary:
@@ -211,6 +214,8 @@ const featuredProjects: ContentItem[] = [
         body: 'Built a pipeline that generated localized semantic edits and 3D renderings from natural-language prompts.',
       },
     ],
+    link: 'https://github.com/animikhaich/3D-Text2LIVE',
+    linkLabel: 'View on GitHub',
   },
   {
     id: 'biased-prosecution',
