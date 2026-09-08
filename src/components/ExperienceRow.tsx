@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import type { ContentItem } from '../types/content.ts';
+import { useInView } from '../hooks/useInView.ts';
 import ContentImg from './ContentImg.tsx';
 import SectionHeader from './SectionHeader.tsx';
 import ScrollRail from './ScrollRail.tsx';
@@ -53,10 +54,13 @@ function ExperienceCardArtwork({ item }: { item: ContentItem }) {
 }
 
 export default function ExperienceRow({ items, onOpen }: ExperienceRowProps) {
+  const { ref: cardsRef, isVisible } = useInView<HTMLElement>();
+
   return (
     <section
+      ref={cardsRef}
       id="experience"
-      className="px-4 pb-12 sm:px-8 lg:px-12"
+      className={`px-4 pb-12 sm:px-8 lg:px-12 ${isVisible ? 'row-cards-in' : ''}`}
       aria-labelledby="experience-title"
     >
       <SectionHeader
@@ -69,13 +73,14 @@ export default function ExperienceRow({ items, onOpen }: ExperienceRowProps) {
         className="grid auto-cols-[clamp(17rem,34vw,22rem)] grid-flow-col gap-4 overflow-x-auto overscroll-x-contain ps-3 pe-1 pt-4 pb-9 snap-x snap-proximity sm:pe-1.5 sm:snap-none"
         role="list"
       >
-        {items.map((item) => (
+        {items.map((item, index) => (
           <button
-            className="group row-card-trigger block"
+            className="group row-card-trigger row-card-stagger block"
             key={item.id}
             type="button"
             onClick={() => onOpen(item)}
             role="listitem"
+            style={{ '--stagger': index } as CSSProperties}
           >
             <span className="row-card-surface relative z-10 grid aspect-[5/6] min-w-0 overflow-hidden">
               <ExperienceCardArtwork item={item} />

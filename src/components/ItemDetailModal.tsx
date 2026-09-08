@@ -8,13 +8,24 @@ type ItemDetailModalProps = {
 };
 
 export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps) {
+  const [cachedItem, setCachedItem] = useState<ContentItem | null>(item);
   const [hasImageError, setHasImageError] = useState(false);
   const dialogRef = useRef<HTMLElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (!item) {
+    if (item) {
+      setCachedItem(item);
+      setHasImageError(false);
+    }
+  }, [item]);
+
+  const displayItem = item ?? cachedItem;
+  const isExiting = !item && cachedItem !== null;
+
+  useEffect(() => {
+    if (!displayItem) {
       return;
     }
 
@@ -75,16 +86,33 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
       window.scrollTo(0, scrollY);
       returnFocusRef.current?.focus();
     };
-  }, [item, onClose]);
+  }, [displayItem?.id, onClose]);
 
-  if (!item) {
+  useEffect(() => {
+    if (!isExiting) {
+      return;
+    }
+
+    // Fallback when reduced-motion disables the exit animation.
+    const timeoutId = window.setTimeout(() => setCachedItem(null), 240);
+    return () => window.clearTimeout(timeoutId);
+  }, [isExiting]);
+
+  if (!displayItem) {
     return null;
   }
 
-  const isAbout = item.id === 'hero-profile';
-  const image = item.image;
+  const finishExit = () => {
+    if (!isExiting) {
+      return;
+    }
+    setCachedItem(null);
+  };
+
+  const isAbout = displayItem.id === 'hero-profile';
+  const image = displayItem.image;
   const canShowImage = Boolean(image) && !hasImageError;
-  const titleId = `modal-title-${item.id}`;
+  const titleId = `modal-title-${displayItem.id}`;
 
   return (
     <div
@@ -94,24 +122,29 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
       aria-labelledby={titleId}
     >
       <button
-        className="absolute inset-0 bg-black/85"
+        className={`absolute inset-0 bg-black/85 transition-opacity duration-[220ms] ease-out ${
+          isExiting ? 'opacity-0' : 'opacity-100'
+        }`}
         type="button"
         aria-label="Close details"
         onClick={onClose}
       />
       <article
         ref={dialogRef}
-        className="relative max-h-[92dvh] w-full max-w-4xl animate-modal-in overflow-auto rounded-t-md bg-panel shadow-stream sm:max-h-[88svh] sm:rounded-md"
+        className={`relative max-h-[92dvh] w-full max-w-4xl overflow-auto rounded-t-md bg-panel shadow-stream sm:max-h-[88svh] sm:rounded-md ${
+          isExiting ? 'animate-modal-out' : 'animate-modal-in'
+        }`}
         tabIndex={-1}
+        onAnimationEnd={finishExit}
       >
         {/* Billboard header: cover images fade into the panel with the title on
             top; logo images sit as a contained chip on a dark gradient. */}
-        {canShowImage && image && item.imageStyle !== 'logo' ? (
+        {canShowImage && image && displayItem.imageStyle !== 'logo' ? (
           <div className="relative">
             <ContentImg
               className="max-h-64 w-full object-cover sm:max-h-96"
               image={image}
-              alt={item.imageAlt ?? ''}
+              alt={displayItem.imageAlt ?? ''}
               sizes="(min-width: 896px) 896px, 100vw"
               onError={() => setHasImageError(true)}
             />
@@ -121,13 +154,13 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
             />
             <div className="absolute right-5 bottom-0 left-5 pb-1 sm:right-9 sm:left-9">
               <p className="mb-2 text-[0.65rem] font-black tracking-[0.3em] text-signal-hot uppercase">
-                {item.rating ?? item.period ?? item.tags[0]}
+                {displayItem.rating ?? displayItem.period ?? displayItem.tags[0]}
               </p>
               <h2
                 className="max-w-2xl pr-10 text-2xl leading-[0.95] font-black tracking-[-0.045em] text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)] sm:pr-0 sm:text-4xl lg:text-5xl"
                 id={titleId}
               >
-                {item.title}
+                {displayItem.title}
               </h2>
             </div>
           </div>
@@ -138,19 +171,19 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
                 <ContentImg
                   className="h-10 w-36 object-contain sm:h-12 sm:w-44"
                   image={image}
-                  alt={item.imageAlt ?? ''}
+                  alt={displayItem.imageAlt ?? ''}
                   onError={() => setHasImageError(true)}
                 />
               </span>
             )}
             <p className="mb-2 text-[0.65rem] font-black tracking-[0.3em] text-signal-hot uppercase">
-              {item.rating ?? item.period ?? item.tags[0]}
+              {displayItem.rating ?? displayItem.period ?? displayItem.tags[0]}
             </p>
             <h2
               className="max-w-2xl pr-10 text-2xl leading-[0.95] font-black tracking-[-0.045em] text-white sm:pr-0 sm:text-4xl lg:text-5xl"
               id={titleId}
             >
-              {item.title}
+              {displayItem.title}
             </h2>
           </div>
         )}
@@ -169,16 +202,16 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
           {isAbout ? (
             <div className="grid gap-5">
               <p className="text-base leading-7 font-semibold text-white/90 sm:text-lg">
-                {item.summary}
+                {displayItem.summary}
               </p>
-              {item.details.map((detail) => (
+              {displayItem.details.map((detail) => (
                 <p className="text-sm leading-7 text-white/75 sm:text-base" key={detail}>
                   {detail}
                 </p>
               ))}
-              {item.tags.length > 0 && (
+              {displayItem.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 border-t border-line pt-5">
-                  {item.tags.map((tag) => (
+                  {displayItem.tags.map((tag) => (
                     <span
                       className="rounded-full border border-line bg-white/5 px-3 py-1.5 text-xs font-bold text-white/75"
                       key={tag}
@@ -194,9 +227,9 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
               {/* Main column: story */}
               <div className="grid content-start gap-5">
                 <p className="text-base leading-7 font-semibold text-white/90 sm:text-lg">
-                  {item.summary}
+                  {displayItem.summary}
                 </p>
-                {item.sections?.map((section) => (
+                {displayItem.sections?.map((section) => (
                   <div key={section.label}>
                     <h3 className="mb-1 text-[0.68rem] font-black tracking-[0.18em] text-white/40 uppercase">
                       {section.label}
@@ -206,13 +239,13 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
                     </p>
                   </div>
                 ))}
-                {!item.sections && item.details.length > 0 && (
+                {!displayItem.sections && displayItem.details.length > 0 && (
                   <div>
                     <h3 className="mb-1.5 text-[0.68rem] font-black tracking-[0.18em] text-white/40 uppercase">
                       What I built
                     </h3>
                     <ul className="grid gap-2 pl-5 text-sm leading-7 text-white/78 sm:text-[0.95rem]">
-                      {item.details.map((detail) => (
+                      {displayItem.details.map((detail) => (
                         <li className="list-disc" key={detail}>
                           {detail}
                         </li>
@@ -225,48 +258,48 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
               {/* Meta column: quick facts + publication link */}
               <aside className="grid content-start gap-3.5 text-sm leading-6">
                 <div>
-                  <span className="font-semibold text-white/40">{item.subtitle}</span>
+                  <span className="font-semibold text-white/40">{displayItem.subtitle}</span>
                 </div>
-                {(item.link || item.secondaryLink) && (
+                {(displayItem.link || displayItem.secondaryLink) && (
                   <div className="grid gap-2 sm:justify-items-start">
-                    {item.link && (
+                    {displayItem.link && (
                       <a
                         className="btn-primary w-full justify-center sm:w-auto sm:justify-start"
-                        href={item.link}
+                        href={displayItem.link}
                         target="_blank"
                         rel="noreferrer"
                       >
-                        {item.linkLabel ?? 'Open link'}
+                        {displayItem.linkLabel ?? 'Open link'}
                       </a>
                     )}
-                    {item.secondaryLink && (
+                    {displayItem.secondaryLink && (
                       <a
                         className="btn-secondary w-full justify-center sm:w-auto sm:justify-start"
-                        href={item.secondaryLink}
+                        href={displayItem.secondaryLink}
                         target="_blank"
                         rel="noreferrer"
                       >
-                        {item.secondaryLinkLabel ?? 'Open link'}
+                        {displayItem.secondaryLinkLabel ?? 'Open link'}
                       </a>
                     )}
                   </div>
                 )}
-                {item.period && (
+                {displayItem.period && (
                   <div>
                     <span className="font-semibold text-white/40">Dates: </span>
-                    <span className="font-semibold text-white/85">{item.period}</span>
+                    <span className="font-semibold text-white/85">{displayItem.period}</span>
                   </div>
                 )}
-                {item.location && (
+                {displayItem.location && (
                   <div>
                     <span className="font-semibold text-white/40">Location: </span>
-                    <span className="font-semibold text-white/85">{item.location}</span>
+                    <span className="font-semibold text-white/85">{displayItem.location}</span>
                   </div>
                 )}
-                {item.tags.length > 0 && (
+                {displayItem.tags.length > 0 && (
                   <div>
                     <span className="font-semibold text-white/40">Technical Stack: </span>
-                    <span className="font-semibold text-white/85">{item.tags.join(', ')}</span>
+                    <span className="font-semibold text-white/85">{displayItem.tags.join(', ')}</span>
                   </div>
                 )}
               </aside>

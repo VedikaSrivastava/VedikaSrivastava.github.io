@@ -1,15 +1,30 @@
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
+
+const ROOT_MARGIN_PX = 180;
 
 export function useInView<TElement extends Element>() {
   const ref = useRef<TElement | null>(null);
-  const [isVisible, setIsVisible] = useState(() => typeof window === 'undefined');
+  // Start visible to avoid SSR/hydration flash; hide offscreen before paint.
+  const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const element = ref.current;
 
     if (!element) {
       return;
     }
+
+    const isInView = () => {
+      const rect = element.getBoundingClientRect();
+      return rect.top < window.innerHeight + ROOT_MARGIN_PX && rect.bottom > -ROOT_MARGIN_PX;
+    };
+
+    if (isInView()) {
+      setIsVisible(true);
+      return;
+    }
+
+    setIsVisible(false);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -18,7 +33,7 @@ export function useInView<TElement extends Element>() {
           observer.disconnect();
         }
       },
-      { rootMargin: '180px' },
+      { rootMargin: `${ROOT_MARGIN_PX}px` },
     );
 
     observer.observe(element);
